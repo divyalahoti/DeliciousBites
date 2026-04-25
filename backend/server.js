@@ -17,6 +17,7 @@ import reportRouter from "./routes/reportRoute.js"
 dns.setServers(["1.1.1.1", "8.8.8.8"]);
 
 
+
 //App config 
 const app = express()
 const port = process.env.PORT || 4000
@@ -28,6 +29,8 @@ const allowedOrigins = [
     'http://localhost:5173',
     'http://localhost:5174',
     "http://localhost:4000",
+    "https://deliciousbites-frontend.vercel.app",
+    "https://deliciousbites-backend.vercel.app"
 
 ];
 
