@@ -1,0 +1,94 @@
+.report-container {
+    padding: 30px;
+    background: #f5f7fb;
+    min-height: 100vh;
+    font-family: "Poppins", sans-serif;
+}
+
+.report-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.report-header h2 {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.report-header p {
+    color: gray;
+}
+
+/* CARDS */
+.report-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    text-align: center;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h4 {
+    color: #777;
+}
+
+.card p {
+    font-size: 22px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+
+.card.profit {
+    background: linear-gradient(135deg, #00c853, #64dd17);
+    color: white;
+}
+
+/* CHART */
+.chart-box {
+    background: white;
+    padding: 20px;
+    margin-top: 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+/* BUTTONS */
+.actions {
+    margin-top: 30px;
+    display: flex;
+    gap: 15px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: 0.3s;
+}
+
+.btn.pdf {
+    background: #ff5252;
+    color: white;
+}
+
+.btn.excel {
+    background: #00c853;
+    color: white;
+}
+
+.btn:hover {
+    transform: scale(1.05);
+}

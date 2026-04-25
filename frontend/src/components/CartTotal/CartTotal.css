@@ -1,0 +1,66 @@
+.cart-total-card {
+  background: #ffffff;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  transition: 0.3s ease;
+}
+
+.cart-total-card:hover {
+  transform: translateY(-3px);
+}
+
+.cart-total-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #222;
+}
+
+.cart-total-details {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 15px;
+  color: #555;
+}
+
+.row span:last-child {
+  font-weight: 500;
+}
+
+.divider {
+  height: 1px;
+  background: #e5e5e5;
+  margin: 10px 0;
+}
+
+.total {
+  font-size: 18px;
+  font-weight: bold;
+  color: #000;
+}
+
+.checkout-btn {
+  margin-top: 20px;
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(135deg, #000, #333);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.checkout-btn:hover {
+  background: linear-gradient(135deg, #333, #000);
+  transform: scale(1.03);
+}

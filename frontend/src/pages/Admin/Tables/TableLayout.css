@@ -1,0 +1,137 @@
+.layout-container {
+  padding: 30px;
+  background: #f1f5f9;
+  min-height: 100vh;
+}
+
+/* HEADER */
+.layout-header h2 {
+  font-size: 28px;
+  color: #0f172a;
+}
+
+.layout-header p {
+  color: #64748b;
+  margin-top: 5px;
+}
+
+/* FILTER */
+.filter-bar {
+  display: flex;
+  gap: 15px;
+  margin: 20px 0;
+  flex-wrap: wrap;
+}
+
+.filter-bar input,
+.filter-bar select {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+}
+
+/* LEGEND */
+.legend {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 20px;
+  align-items: center;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 6px;
+}
+
+.available-dot {
+  background: #22c55e;
+}
+
+.booked-dot {
+  background: #ef4444;
+}
+
+/* TABLE MAP */
+.restaurant-map {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 25px;
+  justify-items: center;
+}
+
+/* TABLE DESIGN */
+.table-circle {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+ transition: all 0.3s ease, background 0.4s ease;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.table-circle:hover {
+  transform: scale(1.1);
+}
+.table-circle:active {
+  transform: scale(0.95);
+}
+
+/* STATUS */
+.available {
+  background: #22c55e;
+  color: white;
+}
+
+.booked {
+  background: #ef4444;
+  color: white;
+}
+
+/* POPUP */
+.popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.popup-content {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  width: 320px;
+  text-align: center;
+}
+
+.popup-info p {
+  margin: 8px 0;
+}
+
+.popup-content button {
+  margin-top: 15px;
+  padding: 10px 15px;
+  border: none;
+  background: #111;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .restaurant-map {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

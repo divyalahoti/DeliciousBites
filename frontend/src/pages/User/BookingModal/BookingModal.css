@@ -1,0 +1,101 @@
+.booking-section {
+  padding: 80px 20px;
+  background-size: cover;
+  background-position: center;
+}
+
+.booking-section h2 {
+  color: white;
+}
+
+.booking-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+  color: white;
+}
+
+.booking-container {
+  display: flex;
+  justify-content: center;
+}
+
+.booking-info {
+  color: white;
+}
+
+.table-section h4 {
+  color: white;
+  width: 45;
+}
+
+.booking-form-box {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  width: 400px;
+}
+
+.booking-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.booking-form input,
+.booking-form select {
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* GRID */
+.table-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* TABLE BOX */
+.table-box {
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+  cursor: pointer;
+  background: #e0e0e0;
+  transition: 0.3s;
+}
+
+/* 🟢 AVAILABLE */
+.table-box:hover {
+  background: #2ecc71;
+  color: white;
+}
+
+/* 🔴 BOOKED */
+.table-box.booked {
+  background: #e74c3c;
+  color: white;
+  cursor: not-allowed;
+}
+
+/* 🟡 SELECTED */
+.table-box.selected {
+  background: #f1c40f;
+  color: black;
+}
+
+/* BUTTON */
+button {
+  background: #1c3b2f;
+  color: white;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #145a32;
+}

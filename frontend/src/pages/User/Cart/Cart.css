@@ -1,0 +1,165 @@
+.cart-container {
+  padding: 40px 20px;
+  background: #f4f6f9;
+  min-height: 100vh;
+}
+
+.cart-title {
+  text-align: center;
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 40px;
+}
+
+/* WRAPPER */
+.cart-wrapper {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 30px;
+}
+
+/* ITEMS */
+.cart-items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* CARD */
+.cart-card {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  background: white;
+  padding: 15px;
+  border-radius: 16px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+  transition: 0.3s;
+}
+
+.cart-card:hover {
+  transform: translateY(-5px);
+}
+
+/* IMAGE */
+.cart-card img {
+  width: 90px;
+  height: 90px;
+  border-radius: 12px;
+  object-fit: cover;
+}
+
+/* INFO */
+.cart-info {
+  flex: 1;
+}
+
+.cart-info h4 {
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.cart-info p {
+  color: #888;
+  margin-bottom: 10px;
+}
+
+/* QTY */
+.qty-box {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.qty-box button {
+  width: 32px;
+  height: 32px;
+  border: none;
+  background: #111;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.qty-box span {
+  font-weight: 500;
+}
+
+/* REMOVE */
+.remove-btn {
+  background: #ff4d4f;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* SUMMARY */
+.cart-summary {
+  background: white;
+  padding: 25px;
+  border-radius: 16px;
+  height: fit-content;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+}
+
+.cart-summary h3 {
+  margin-bottom: 20px;
+}
+
+/* ROW */
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+
+.summary-total {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  font-size: 20px;
+  font-weight: 600;
+}
+
+/* BUTTONS */
+.checkout-btn {
+  width: 100%;
+  margin-top: 25px;
+  padding: 14px;
+  background: linear-gradient(135deg, #111, #333);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.checkout-btn:hover {
+  transform: scale(1.05);
+}
+
+.clear-btn {
+  width: 100%;
+  margin-top: 10px;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+ 
+  cursor: pointer;
+}
+
+/* EMPTY */
+.empty-text {
+  text-align: center;
+  color: #888;
+  font-size: 18px;
+}
+
+/* 📱 RESPONSIVE */
+@media (max-width: 900px) {
+  .cart-wrapper {
+    grid-template-columns: 1fr;
+  }
+}

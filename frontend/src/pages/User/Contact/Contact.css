@@ -1,0 +1,141 @@
+/* MAIN */
+.contact-section {
+  padding: 80px 20px;
+  background: #fdf6f3;
+}
+
+/* TITLE */
+.contact-title {
+  text-align: center;
+  font-size: 36px;
+  margin-bottom: 50px;
+  color: #fff;
+}
+
+/* LAYOUT */
+.contact-container {
+  display: flex;
+  gap: 40px;
+  max-width: 1100px;
+  margin: auto;
+  flex-wrap: wrap;
+}
+
+/* LEFT INFO */
+.contact-info {
+  flex: 1;
+  min-width: 300px;
+}
+
+.contact-info h3 {
+  margin-bottom: 15px;
+  color: #fff;
+}
+
+.contact-info p {
+
+  color: #fff;
+}
+
+/* INFO BOX */
+.info-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.info-box span {
+  font-size: 20px;
+}
+
+.info-box a {
+  color: #fff;
+  text-decoration: none;
+}
+
+/* SOCIAL */
+.social-links {
+  margin-top: 20px;
+}
+
+.social-links a {
+  font-size: 20px;
+  margin-right: 10px;
+  text-decoration: none;
+  color: #fff;
+}
+
+/* FORM */
+.contact-form {
+  flex: 1;
+  min-width: 300px;
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+}
+
+.contact-form h3 {
+  margin-bottom: 15px;
+  color: #1c3b2f;
+}
+
+/* INPUTS */
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  outline: none;
+}
+
+/* BUTTON */
+.contact-form button {
+  width: 100%;
+  padding: 12px;
+  background: #1c3b2f;
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.contact-form button:hover {
+  background: #8B0000;
+}
+
+/* MAP */
+.map-container {
+  margin-top: 50px;
+}
+
+.map-container iframe {
+  width: 100%;
+  height: 300px;
+  border-radius: 15px;
+  border: none;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  .contact-container {
+    flex-direction: column;
+  }
+}
+
+/* Smooth animation feel */
+.contact-section * {
+  transition: all 0.3s ease;
+}
+
+/* Hover effect */
+.info-box:hover {
+  transform: translateX(5px);
+}
+
+.contact-form button:hover {
+  transform: scale(1.05);
+}

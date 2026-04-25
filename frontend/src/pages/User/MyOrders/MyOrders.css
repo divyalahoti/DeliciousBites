@@ -1,0 +1,38 @@
+.myorders-page {
+  padding: 30px;
+}
+
+.orders-container {
+  display: grid;
+  gap: 20px;
+}
+
+.order-card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+.order-top {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.status {
+  background: #eee;
+  padding: 4px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+}
+
+.order-items p {
+  margin: 3px 0;
+}
+
+.order-bottom {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
