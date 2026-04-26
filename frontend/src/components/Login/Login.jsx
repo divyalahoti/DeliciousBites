@@ -38,6 +38,9 @@ const Login = ({ setToken }) => {
         if (response.data.user.role === "admin") {
           navigate("/dashboard");
         } else {
+          localStorage.setItem("user", JSON.stringify(response.data.user));
+        setToken(response.data.token);
+        window.location.reload();
           navigate("/");
         }
       } else {

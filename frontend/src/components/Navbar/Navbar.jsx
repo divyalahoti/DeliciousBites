@@ -14,17 +14,21 @@ const Navbar = ({ setToken }) => {
   const { getCartCount } = useContext(ShopContext);
 
   // ✅ FIX: Listen for login/logout changes
+  // useEffect(() => {
+  //   const loadUser = () => {
+  //     const storedUser = localStorage.getItem("user");
+  //     setUser(storedUser ? JSON.parse(storedUser) : null);
+  //   };
+
+  //   loadUser();
+
+  //   window.addEventListener("storage", loadUser); // auto update
+  //   return () => window.removeEventListener("storage", loadUser);
+  // }, []);
   useEffect(() => {
-    const loadUser = () => {
-      const storedUser = localStorage.getItem("user");
-      setUser(storedUser ? JSON.parse(storedUser) : null);
-    };
-
-    loadUser();
-
-    window.addEventListener("storage", loadUser); // auto update
-    return () => window.removeEventListener("storage", loadUser);
-  }, []);
+  const storedUser = localStorage.getItem("user");
+  setUser(storedUser ? JSON.parse(storedUser) : null);
+}, []);
 
   // ✅ LOGOUT
   const handleLogout = () => {
@@ -117,6 +121,7 @@ const Navbar = ({ setToken }) => {
             </button>
           </>
         )}
+
       </div>
     </header>
   );

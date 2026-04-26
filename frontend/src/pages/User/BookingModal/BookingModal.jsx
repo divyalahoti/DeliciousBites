@@ -66,7 +66,7 @@ const BookingModal = () => {
 
       const booked = res.data.bookedTables || [];
 
-      const allTables = Array.from({ length: 10 }, (_, i) => i + 1);
+      const allTables = Array.from({ length: 12 }, (_, i) => i + 1);
 
       const tableData = allTables.map((num) => ({
         number: num,

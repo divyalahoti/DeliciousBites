@@ -138,8 +138,71 @@
 }
 
 
+/* FIX NAVBAR HEIGHT */
+.navbar {
+  padding: 12px 20px;
+}
 
+/* FIX RIGHT SIDE */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
 
+/* USER NAME */
+.user-name {
+  font-size: 14px;
+  font-weight: 500;
+  color: #1c3b2f;
+  white-space: nowrap;
+}
+
+/* CART FIX */
+.cart-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.cart-icon img {
+  width: 22px;
+}
+
+/* ===== MOBILE FIX ===== */
+@media (max-width: 768px) {
+
+  .nav-right {
+    gap: 8px;
+  }
+
+  /* HIDE LONG NAME */
+  .user-name {
+    font-size: 12px;
+    max-width: 80px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* SMALL BUTTONS */
+  .call-btn,
+  .logout-btn {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
+
+  /* CART SMALL */
+  .cart-icon img {
+    width: 20px;
+  }
+
+  .cart-count {
+    font-size: 8px;
+    padding: 2px 5px;
+    top: -5px;
+    right: -5px;
+  }
+}
 
 
 /* ===== MOBILE ===== */
