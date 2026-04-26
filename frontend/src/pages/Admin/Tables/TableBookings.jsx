@@ -8,6 +8,16 @@ import "aos/dist/aos.css";
 const TableBookings = () => {
   const [bookings, setBookings] = useState([]);
   const [search, setSearch] = useState("");
+  const [debouncedSearch, setDebouncedSearch] = useState("");
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedSearch(search);
+    }, 300);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+
   const { backendUrl } = useContext(ShopContext);
 
   useEffect(() => {
@@ -27,7 +37,8 @@ const TableBookings = () => {
 
   // ✅ SMART FILTER (handles all types safely)
   const filteredBookings = bookings.filter((b) => {
-    const text = search.toLowerCase();
+    // const text = search.toLowerCase();
+    const text = debouncedSearch.toLowerCase();
 
     const meal =
       Array.isArray(b.mealType)

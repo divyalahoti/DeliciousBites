@@ -34,6 +34,7 @@ import TableBookings from "./pages/Admin/Tables/TableBookings";
 import TableLayout from "./pages/Admin/Tables/TableLayout";
 import Expenses from "./pages/Admin/Expenses/Expenses";
 import Report from "./pages/Admin/Report/Report";
+import ScrollToTop from "./components/ScrollToTop";
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
@@ -53,8 +54,9 @@ function App() {
 
   return (
     <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
-      <ToastContainer />
+      <ScrollToTop />
       <Navbar setToken={setToken} />
+      <ToastContainer />
       <hr />
       {/* ROUTES */}
       <Routes>
@@ -70,12 +72,15 @@ function App() {
         <Route path="/bookingTbl" element={<BookingModal />} />
         <Route path="/cart" element={<Cart />} />
         <Route path='/place-order' element={<PlaceOrder />} />
+        
         <Route path="/table-bookings" element={<TableBookings />} />
         <Route path="/table-layout" element={<TableLayout />} />
+        
         <Route path="/my-orders" element={<MyOrders />} />
 
         {/* ADMIN ROUTES */}
         <Route path="/dashboard" element={<Dashboard />} />
+        
         <Route path="/add" element={<Add token={token} />} />
         <Route path="/list" element={<List token={token} />} />
         <Route path="/orders" element={<Orders token={token} />} />

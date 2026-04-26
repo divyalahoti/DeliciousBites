@@ -13,10 +13,7 @@ const Login = ({ setToken }) => {
   const [password, setPassword] = useState("");
   const [currentState, setCurrentState] = useState("Login");
   const { backendUrl } = useContext(ShopContext);
-
   const navigate = useNavigate();
-
-
   const handleSubmit = async (e) => {
     e.preventDefault();
 

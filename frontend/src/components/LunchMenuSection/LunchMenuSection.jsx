@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 const LunchMenuSection = () => {
   const { products, addToCart, navigate } = useContext(ShopContext);
 
+
   const [orders, setOrders] = useState([]);
   const [loadingId, setLoadingId] = useState(null);
 
@@ -88,7 +89,7 @@ const LunchMenuSection = () => {
                       onClick={() => placeOrder(item)}
                       disabled={loadingId === item._id}
                     >
-                      {loadingId === item._id ? "..." : "Order Now"}
+                      {loadingId === item._id ? "Adding..." : "Order Now"}
                     </button>
                   ) : order.status === "placed" ? (
                     <p style={{ color: "green", fontWeight: "bold" }}>

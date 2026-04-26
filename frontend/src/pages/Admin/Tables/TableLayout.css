@@ -1,10 +1,14 @@
 .layout-container {
-  padding: 30px;
+  padding: 30px 20px;
   background: #f1f5f9;
   min-height: 100vh;
 }
 
 /* HEADER */
+.layout-header {
+  text-align: center;
+}
+
 .layout-header h2 {
   font-size: 28px;
   color: #0f172a;
@@ -19,8 +23,9 @@
 .filter-bar {
   display: flex;
   gap: 15px;
-  margin: 20px 0;
+  margin: 25px 0;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .filter-bar input,
@@ -28,6 +33,7 @@
   padding: 10px 14px;
   border-radius: 10px;
   border: 1px solid #ddd;
+  min-width: 150px;
 }
 
 /* LEGEND */
@@ -35,7 +41,9 @@
   margin-bottom: 20px;
   display: flex;
   gap: 20px;
+  justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .dot {
@@ -54,31 +62,35 @@
   background: #ef4444;
 }
 
-/* TABLE MAP */
+/* TABLE GRID */
 .restaurant-map {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   gap: 25px;
   justify-items: center;
+  max-width: 1000px;
+  margin: auto;
 }
 
-/* TABLE DESIGN */
+/* TABLE */
 .table-circle {
-  width: 80px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   border-radius: 50%;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
   cursor: pointer;
- transition: all 0.3s ease, background 0.4s ease;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+  font-size: 18px;
 }
 
 .table-circle:hover {
   transform: scale(1.1);
 }
+
 .table-circle:active {
   transform: scale(0.95);
 }
@@ -101,17 +113,19 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 20px;
 }
 
 .popup-content {
   background: white;
   padding: 25px;
   border-radius: 16px;
-  width: 320px;
+  width: 100%;
+  max-width: 350px;
   text-align: center;
 }
 
@@ -129,9 +143,75 @@
   cursor: pointer;
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
+/* ========================= */
+/* 📱 MOBILE (≤ 576px) */
+/* ========================= */
+@media (max-width: 576px) {
+
+  .layout-header h2 {
+    font-size: 22px;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .filter-bar input,
+  .filter-bar select {
+    width: 100%;
+  }
+
   .restaurant-map {
     grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+  }
+
+  .table-circle {
+    width: 65px;
+    height: 65px;
+    font-size: 14px;
+  }
+}
+
+/* ========================= */
+/* 📲 TABLET (577px - 992px) */
+/* ========================= */
+@media (min-width: 577px) and (max-width: 992px) {
+
+  .restaurant-map {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .table-circle {
+    width: 75px;
+    height: 75px;
+    font-size: 16px;
+  }
+}
+
+/* ========================= */
+/* 💻 LAPTOP (993px - 1200px) */
+/* ========================= */
+@media (min-width: 993px) and (max-width: 1200px) {
+
+  .restaurant-map {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* ========================= */
+/* 🖥 LARGE SCREENS (1200px+) */
+/* ========================= */
+@media (min-width: 1200px) {
+
+  .restaurant-map {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .table-circle {
+    width: 100px;
+    height: 100px;
+    font-size: 20px;
   }
 }

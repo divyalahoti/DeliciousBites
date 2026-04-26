@@ -10,6 +10,7 @@ import c6 from "../../../assets/culture_food6.jpg";
 
 const Culture = () => {
   const images = [c1, c2, c3, c4, c5, c6];
+  
 
   return (
     <div className="culture">

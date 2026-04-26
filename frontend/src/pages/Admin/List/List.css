@@ -3,14 +3,17 @@
   min-height: 100vh;
   background: linear-gradient(135deg, #f8fafc, #eef2ff);
   font-family: "Inter", sans-serif;
+  margin-top: 30px;
 }
 
-/* TOP HEADER */
+/* ================= HEADER ================= */
 .list-header-top {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 25px;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
 .list-header-top h2 {
@@ -23,7 +26,7 @@
   padding: 10px 14px;
   border-radius: 10px;
   border: 1px solid #ddd;
-  width: 250px;
+  width: 260px;
   transition: 0.3s;
 }
 
@@ -33,7 +36,7 @@
   box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
 }
 
-/* TABLE HEADER */
+/* ================= TABLE HEADER ================= */
 .list-header {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -44,7 +47,7 @@
   font-size: 14px;
 }
 
-/* ROW */
+/* ================= ROW ================= */
 .list-row {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
@@ -62,7 +65,7 @@
   box-shadow: 0 12px 30px rgba(0,0,0,0.08);
 }
 
-/* ITEM INFO */
+/* ================= ITEM ================= */
 .item-info {
   display: flex;
   gap: 15px;
@@ -87,19 +90,18 @@
   color: #666;
 }
 
-/* CATEGORY */
+/* ================= CATEGORY / PRICE ================= */
 .category {
   color: #475569;
   font-weight: 500;
 }
 
-/* PRICE */
 .price {
   font-weight: 600;
   color: #0f172a;
 }
 
-/* ACTIONS */
+/* ================= ACTIONS ================= */
 .actions {
   display: flex;
   gap: 10px;
@@ -131,15 +133,22 @@
   background: #dc2626;
 }
 
-/* EMPTY */
+/* ================= EMPTY ================= */
 .no-data {
   text-align: center;
   margin-top: 30px;
   color: #888;
 }
 
-/* MOBILE */
-@media (max-width: 768px) {
+/* ================================================= */
+/* 📱 MOBILE (≤600px) */
+/* ================================================= */
+@media (max-width: 600px) {
+
+  .list-container {
+    padding: 20px 10px;
+  }
+
   .list-header {
     display: none;
   }
@@ -147,19 +156,86 @@
   .list-row {
     grid-template-columns: 1fr;
     gap: 10px;
+    padding: 15px;
   }
 
   .item-info {
-    flex-direction: column;
-    align-items: flex-start;
+    flex-direction: row;
+    gap: 10px;
+  }
+
+  .item-info img {
+    width: 50px;
+    height: 50px;
   }
 
   .list-header-top {
     flex-direction: column;
-    gap: 10px;
+    align-items: flex-start;
   }
 
   .list-header-top input {
     width: 100%;
+  }
+
+  .actions {
+    justify-content: flex-end;
+  }
+}
+
+/* ================================================= */
+/* 📲 TABLET (601px - 900px) */
+/* ================================================= */
+@media (min-width: 601px) and (max-width: 900px) {
+
+  .list-row {
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    padding: 12px;
+  }
+
+  .item-info img {
+    width: 55px;
+    height: 55px;
+  }
+
+  .list-header-top input {
+    width: 200px;
+  }
+}
+
+/* ================================================= */
+/* 💻 LAPTOP (901px - 1200px) */
+/* ================================================= */
+@media (min-width: 901px) and (max-width: 1200px) {
+
+  .list-container {
+    padding: 30px 40px;
+  }
+
+  .list-row {
+    padding: 14px;
+  }
+}
+
+/* ================================================= */
+/* 🖥️ LARGE SCREEN (1200px+) */
+/* ================================================= */
+@media (min-width: 1200px) {
+
+  .list-container {
+    padding: 40px 80px;
+  }
+
+  .list-header-top h2 {
+    font-size: 28px;
+  }
+
+  .list-row {
+    padding: 18px;
+  }
+
+  .item-info img {
+    width: 70px;
+    height: 70px;
   }
 }

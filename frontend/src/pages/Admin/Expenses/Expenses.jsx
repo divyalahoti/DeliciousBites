@@ -6,7 +6,6 @@ import "./Expenses.css";
 
 const Expenses = () => {
   const { backendUrl } = useContext(ShopContext);
-
   const [expenses, setExpenses] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [editId, setEditId] = useState(null);
@@ -15,7 +14,6 @@ const Expenses = () => {
     from: "",
     to: ""
   });
-
   const [form, setForm] = useState({
     title: "",
     amount: "",
@@ -124,9 +122,16 @@ const Expenses = () => {
   return (
     <div className="expense-page">
 
-      <h2>💰 Expense Manager</h2>
+      <div className="expense-header">
+        <div>
+          <h2>💰 Expense Manager</h2>
+          <h3>Total Expense: ₹{totalExpense}</h3>
+        </div>
 
-      <h3>Total Expense: ₹{totalExpense}</h3>
+        <button className="add-btn" onClick={() => setShowModal(true)}>
+          ➕ Add Expense
+        </button>
+      </div>
 
       {/* DATE FILTER */}
       <div className="date-filter">
@@ -143,12 +148,6 @@ const Expenses = () => {
           }
         />
       </div>
-
-      {/* ADD BUTTON */}
-      <button className="add-btn" onClick={() => setShowModal(true)}>
-        ➕ Add Expense
-      </button>
-
       {/* TABLE */}
       <div className="expense-table">
         <table>
@@ -170,10 +169,8 @@ const Expenses = () => {
                 <td>{exp.category}</td>
                 <td>{new Date(exp.date).toLocaleDateString()}</td>
                 <td>
-                  <button onClick={() => openEdit(exp)}>Edit</button>
-                  <button onClick={() => deleteExpense(exp._id)}>
-                    Delete
-                  </button>
+                  <button className="edit-btn" onClick={() => openEdit(exp)}>Edit</button>
+                  <button className="delete-btn" onClick={() => deleteExpense(exp._id)}>Delete</button>
                 </td>
               </tr>
             ))}
@@ -186,7 +183,9 @@ const Expenses = () => {
         <div className="modal">
           <div className="modal-box">
 
-            <h3>{editId ? "Edit Expense" : "Add Expense"}</h3>
+            <h3>
+              {editId ? "✏️ Edit Expense" : "➕ Add Expense"}
+            </h3>
 
             <form onSubmit={handleSubmit}>
               <input

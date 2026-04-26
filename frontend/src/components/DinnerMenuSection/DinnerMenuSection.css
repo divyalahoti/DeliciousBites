@@ -1,15 +1,16 @@
 /* SECTION */
 .dinner-section {
-  padding: 90px 20px;
+  padding: 80px 20px;
   background: #fdf6f3;
 }
 
 /* HEADING */
 .dinner-heading {
   text-align: center;
-  font-size: 40px;
-  margin-bottom: 60px;
+  font-size: 36px;
+  margin-bottom: 50px;
   color: #1c3b2f;
+  font-weight: 600;
 }
 
 /* GRID */
@@ -26,7 +27,7 @@
   background: white;
   border-radius: 20px;
   overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
   transition: 0.3s;
 }
 
@@ -47,6 +48,9 @@
   margin: 0;
   font-size: 18px;
   color: #8B0000;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 /* LIST */
@@ -55,85 +59,106 @@
   padding: 0 15px 15px;
 }
 
+/* 🔥 ITEM ROW (FIXED ALIGNMENT) */
 .dinner-card li {
   display: flex;
-  justify-content: space-between;
-  padding: 6px 0;
-  font-size: 14px;
+  flex-direction: column;
+  /* IMPORTANT for mobile */
+  gap: 6px;
+  padding: 10px 0;
   border-bottom: 1px dashed #eee;
 }
 
+/* TOP ROW (NAME + PRICE) */
+.item-top {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
 /* PRICE */
-.dinner-card li span {
+.item-top span {
   font-weight: bold;
   color: #1c3b2f;
 }
 
-/* RESPONSIVE */
-@media (max-width: 992px) {
+/* BUTTON */
+.order-btn {
+  background: linear-gradient(135deg, #1c3b2f, #8B0000);
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  cursor: pointer;
+  width: fit-content;
+  transition: 0.3s;
+}
+
+.order-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* ========================= */
+/* 📱 MOBILE (≤ 480px) */
+/* ========================= */
+@media (max-width: 480px) {
+
+  .dinner-section {
+    padding: 50px 12px;
+  }
+
+  .dinner-heading {
+    font-size: 24px;
+    margin-bottom: 30px;
+  }
+
+  .dinner-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .dinner-card img {
+    height: 150px;
+  }
+
+  .dinner-card h3 {
+    font-size: 16px;
+  }
+
+  .item-top {
+    font-size: 13px;
+  }
+
+  .order-btn {
+    font-size: 12px;
+    padding: 5px 10px;
+  }
+}
+
+/* ========================= */
+/* 📱 TABLET (≤ 768px) */
+/* ========================= */
+@media (max-width: 768px) {
   .dinner-grid {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-@media (max-width: 576px) {
-  .dinner-grid {
-    grid-template-columns: 1fr;
+  .dinner-heading {
+    font-size: 28px;
   }
 }
 
-.order-btn {
-  background: linear-gradient(135deg, #1c3b2f, #8B0000);
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  cursor: pointer;
-  margin-top: 10px;
-  transition: 0.3s;
-}
+/* ========================= */
+/* 💻 LARGE SCREEN (≥ 1200px) */
+/* ========================= */
+@media (min-width: 1200px) {
+  .dinner-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 
-.order-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-/* small button for dinner list */
-.order-btn.small {
-  padding: 4px 10px;
-  font-size: 12px;
-  margin-left: 10px;
-}
-
-/* BUTTON STYLE */
-.order-btn {
-  background: linear-gradient(135deg, #1c3b2f, #8B0000);
-  color: white;
-  border: none;
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: 0.3s;
-}
-
-/* HOVER EFFECT */
-.order-btn:hover {
-  transform: scale(1.05);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
-}
-
-/* CARD HOVER ENHANCEMENT */
-.menu-card:hover {
-  transform: translateY(-8px);
-}
-
-/* IMAGE ZOOM */
-.menu-card img {
-  transition: 0.3s;
-}
-
-.menu-card:hover img {
-  transform: scale(1.05);
+  .dinner-heading {
+    font-size: 40px;
+  }
 }

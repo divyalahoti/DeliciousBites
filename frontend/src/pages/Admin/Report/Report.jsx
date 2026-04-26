@@ -18,6 +18,7 @@ const Report = () => {
         totalBookings: 0,
         totalExpense: 0,
         profit: 0,
+
     });
 
     // Chart Data
@@ -115,22 +116,22 @@ const Report = () => {
             {/* CARDS */}
             <div className="report-cards">
                 <div className="card" data-aos="zoom-in">
-                    <h4>Orders</h4>
+                    <h4>📦 Orders</h4>
                     <p>{report.totalOrders}</p>
                 </div>
 
                 <div className="card" data-aos="zoom-in" data-aos-delay="100">
-                    <h4>Revenue</h4>
+                    <h4>💰 Revenue</h4>
                     <p>₹{report.totalRevenue}</p>
                 </div>
 
                 <div className="card" data-aos="zoom-in" data-aos-delay="200">
-                    <h4>Expense</h4>
+                    <h4>💸 Expense</h4>
                     <p>₹{report.totalExpense}</p>
                 </div>
 
                 <div className="card profit" data-aos="zoom-in" data-aos-delay="300">
-                    <h4>Profit</h4>
+                    <h4>📈 Profit</h4>
                     <p>₹{report.profit}</p>
                 </div>
             </div>

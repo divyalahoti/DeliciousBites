@@ -19,6 +19,7 @@ const PlaceOrder = () => {
     clearCart
   } = useContext(ShopContext);
 
+
   const [method] = useState("cod");
 
   // ✅ CORRECT STATE
@@ -87,55 +88,55 @@ const PlaceOrder = () => {
 
   // ✅ SUBMIT
   const onSubmitHandler = async (e) => {
-  e.preventDefault();
+    e.preventDefault();
 
-  try {
-    const user = JSON.parse(localStorage.getItem("user"));
+    try {
+      const user = JSON.parse(localStorage.getItem("user"));
 
-    localStorage.setItem("address", JSON.stringify(formData));
+      localStorage.setItem("address", JSON.stringify(formData));
 
-    let orderItems = [];
+      let orderItems = [];
 
-    for (const itemId in cartItems) {
-      const itemInfo = products.find((p) => p._id === itemId);
+      for (const itemId in cartItems) {
+        const itemInfo = products.find((p) => p._id === itemId);
 
-      if (itemInfo) {
-        orderItems.push({
-          ...itemInfo,
-          quantity: cartItems[itemId],
-        });
+        if (itemInfo) {
+          orderItems.push({
+            ...itemInfo,
+            quantity: cartItems[itemId],
+          });
+        }
       }
+
+      const orderData = {
+        userId: user._id,
+        address: formData,
+        items: orderItems,
+        amount: getCartAmount() + delivery_fee,
+      };
+
+      const response = await axios.post(
+        backendUrl + "/api/orders/placeOrder",
+        orderData,
+        { headers: { token } }
+      );
+
+      if (response.data.success) {
+        toast.success("Order Placed Successfully 🎉");
+
+        // ✅ CORRECT WAY
+        await clearCart();   // 🔥 IMPORTANT FIX
+
+        navigate("/my-orders");
+      } else {
+        toast.error(response.data.message);
+      }
+
+    } catch (error) {
+      console.log(error);
+      toast.error(error.message);
     }
-
-    const orderData = {
-      userId: user._id,
-      address: formData,
-      items: orderItems,
-      amount: getCartAmount() + delivery_fee,
-    };
-
-    const response = await axios.post(
-      backendUrl + "/api/orders/placeOrder",
-      orderData,
-      { headers: { token } }
-    );
-
-    if (response.data.success) {
-      toast.success("Order Placed Successfully 🎉");
-
-      // ✅ CORRECT WAY
-      await clearCart();   // 🔥 IMPORTANT FIX
-
-      navigate("/my-orders");
-    } else {
-      toast.error(response.data.message);
-    }
-
-  } catch (error) {
-    console.log(error);
-    toast.error(error.message);
-  }
-};
+  };
 
   return (
     <div className="placeorder-container">
@@ -169,7 +170,7 @@ const PlaceOrder = () => {
             <input name="country" value={formData.country} onChange={onChangeHandler} placeholder="Country" required />
           </div>
 
-          <input name="phone" value={formData.phone} onChange={onChangeHandler} placeholder="Phone Number" required />
+          <input name="phone" value={formData.phone} onChange={onChangeHandler} placeholder="Phone Number" type="tel" inputMode="numeric" required />
 
         </div>
 

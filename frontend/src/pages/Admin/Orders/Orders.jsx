@@ -9,6 +9,7 @@ import "aos/dist/aos.css";
 const Orders = ({ filter }) => {
   const [orders, setOrders] = useState([]);
   const { backendUrl, currency } = useContext(ShopContext);
+  
 
   useEffect(() => {
     AOS.init({ duration: 800, once: true });

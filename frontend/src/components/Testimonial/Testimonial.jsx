@@ -14,6 +14,7 @@ const Testimonial = () => {
       name: "Radhika Sharma",
       role: "Food Lover",
       image: t1
+
     },
     {
       text: "The taste is authentic and delicious. Highly recommended for food lovers!",
@@ -63,7 +64,11 @@ const Testimonial = () => {
           {/* DOTS */}
           <div className="dots">
             {testimonials.map((_, i) => (
-              <span key={i} className={i === index ? "active" : ""}></span>
+              <span
+                key={i}
+                className={i === index ? "active" : ""}
+                onClick={() => setIndex(i)}   // 🔥 clickable
+              ></span>
             ))}
           </div>
 

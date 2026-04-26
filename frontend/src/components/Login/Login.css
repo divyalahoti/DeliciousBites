@@ -1,21 +1,27 @@
 /* FULL PAGE CENTER */
 .login-container {
-  height: 80vh;
+  min-height: 100vh;
+  /* 🔥 FIX: full height */
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* background: linear-gradient(135deg, #ff6b00, #ff9f43); */
-  /* background: #efe4db; */
+  padding: 20px;
+  /* prevents edge touching */
+  box-sizing: border-box;
 }
 
 /* CARD */
 .login-card {
   background: #efe4db;
   padding: 40px 30px;
-  width: 550px;
+
+  width: 100%;
+  max-width: 500px;
+  /* 🔥 responsive instead of fixed */
+
   border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   text-align: center;
   animation: fadeIn 0.5s ease;
 }
@@ -23,6 +29,7 @@
 /* TITLE */
 .login-card h2 {
   margin-bottom: 5px;
+  font-size: 26px;
 }
 
 /* SUBTITLE */
@@ -40,12 +47,13 @@
 /* INPUT */
 .login-card input {
   width: 100%;
-  padding: 10px;
-  margin: 8px 0;
+  padding: 12px;
+  margin: 10px 0;
   border-radius: 8px;
   border: 1px solid #ddd;
   outline: none;
   transition: 0.3s;
+  font-size: 14px;
 }
 
 .login-card input:focus {
@@ -55,7 +63,7 @@
 /* BUTTON */
 .login-card button {
   width: 100%;
-  padding: 10px;
+  padding: 12px;
   margin-top: 15px;
   background: #ff6b00;
   color: white;
@@ -63,6 +71,7 @@
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
+  font-size: 15px;
 }
 
 .login-card button:hover {
@@ -88,8 +97,51 @@
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ========================= */
+/* 📱 MOBILE (≤ 480px) */
+/* ========================= */
+@media (max-width: 480px) {
+  .login-card {
+    padding: 25px 20px;
+    border-radius: 12px;
+  }
+
+  .login-card h2 {
+    font-size: 22px;
+  }
+
+  .login-card input {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .login-card button {
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+/* ========================= */
+/* 📱 TABLET (≤ 768px) */
+/* ========================= */
+@media (max-width: 768px) {
+  .login-card {
+    max-width: 420px;
+  }
+}
+
+/* ========================= */
+/* 💻 LARGE SCREENS (≥ 1200px) */
+/* ========================= */
+@media (min-width: 1200px) {
+  .login-card {
+    max-width: 550px;
   }
 }

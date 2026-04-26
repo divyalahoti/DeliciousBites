@@ -5,7 +5,7 @@ import BookingModal from "../../pages/User/BookingModal/BookingModal";
 import { toast } from "react-toastify";
 
 const DinnerMenuSection = () => {
-  const { products, addToCart,navigate } = useContext(ShopContext);
+  const { products, addToCart, navigate } = useContext(ShopContext);
 
   const [loadingId, setLoadingId] = useState(null);
   const [orders, setOrders] = useState([]); // ✅ IMPORTANT
@@ -15,7 +15,6 @@ const DinnerMenuSection = () => {
   const dinnerItems = products.filter(
     (item) => item.category === "dinner"
   );
-
   // ✅ GROUP BY SUBCATEGORY
   const groupedData = dinnerItems.reduce((acc, item) => {
     if (!acc[item.subCategory]) {
@@ -108,8 +107,10 @@ const DinnerMenuSection = () => {
 
                 return (
                   <li key={i}>
-                    {item.name}
-                    <span>₹{item.price}</span>
+                    <div className="item-top">
+                      <span>{item.name}</span>
+                      <span>₹{item.price}</span>
+                    </div>
 
                     {!order ? (
                       <button
@@ -117,13 +118,13 @@ const DinnerMenuSection = () => {
                         onClick={() => placeOrder(item)}
                         disabled={loadingId === item._id}
                       >
-                        {loadingId === item._id ? "..." : "Order Now"}
+                        {loadingId === item._id ? "Adding..." : "Order Now"}
                       </button>
-                    ) : order.status === "placed" ? (
+                    ) : (
                       <p style={{ color: "green", fontWeight: "bold" }}>
                         ✅ Order Placed
                       </p>
-                    ) : null}
+                    )}
                   </li>
                 );
               })}

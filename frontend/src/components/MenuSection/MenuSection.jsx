@@ -3,25 +3,13 @@ import "./MenuSection.css";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { ShopContext } from "../../deliciousBitesContext/ShopContext";
-
-// ✅ AOS IMPORT
 import AOS from "aos";
 import "aos/dist/aos.css";
 
 const MenuSection = () => {
   const { products, addToCart, navigate } = useContext(ShopContext);
-
   const [orders, setOrders] = useState([]);
   const [loadingId, setLoadingId] = useState(null);
-
-  // // ✅ INIT AOS
-  // useEffect(() => {
-  //   AOS.init({
-  //     duration: 800,
-  //     once: true,
-  //     easing: "ease-in-out",
-  //   });
-  // }, []);
 
   // ✅ PLACE ORDER
   const placeOrder = async (item) => {
@@ -100,7 +88,7 @@ const MenuSection = () => {
                       onClick={() => placeOrder(item)}
                       disabled={loadingId === item._id}
                     >
-                      {loadingId === item._id ? "..." : "Order Now"}
+                      {loadingId === item._id ? "Loading..." : "Order Now"}
                     </button>
                   ) : order.status === "placed" ? (
                     <p style={{ color: "green", fontWeight: "bold" }}>

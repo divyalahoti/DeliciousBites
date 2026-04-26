@@ -1,76 +1,349 @@
 .expense-page {
-  padding: 20px;
+  padding: 40px 60px;
+  background: #f8fafc;
+  min-height: 100vh;
+  margin-top: 30px;
 }
 
-h2 {
+/* HEADINGS */
+.expense-page h2 {
+  font-size: 28px;
   margin-bottom: 10px;
 }
 
+.expense-page h3 {
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+/* ADD BUTTON */
 .add-btn {
   background: #1c3b2f;
   color: white;
-  padding: 8px 15px;
+  padding: 10px 18px;
   border: none;
-  margin: 10px 0;
+  border-radius: 8px;
+  margin: 15px 0;
   cursor: pointer;
+  transition: 0.3s;
 }
 
+.add-btn:hover {
+  background: #14532d;
+}
+
+/* DATE FILTER */
 .date-filter {
   display: flex;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 15px;
+  margin-bottom: 15px;
+  flex-wrap: wrap;
 }
 
+.date-filter input {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+}
+
+/* TABLE WRAPPER */
+.expense-table {
+  overflow-x: auto;
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+}
+
+/* TABLE */
 .expense-table table {
   width: 100%;
   border-collapse: collapse;
+  min-width: 600px;
 }
 
 .expense-table th,
 .expense-table td {
-  border: 1px solid #ddd;
-  padding: 10px;
+  border: 1px solid #eee;
+  padding: 12px;
   text-align: center;
 }
 
 .expense-table th {
-  background: #f5f5f5;
+  background: #f1f5f9;
+  font-size: 14px;
 }
 
+.expense-table tr:hover {
+  background: #f9fafb;
+}
+
+/* BUTTONS */
 button {
   margin: 3px;
-  padding: 5px 10px;
-  cursor: pointer;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: none;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+.edit-btn {
+  background: #22c55e;
+  color: white;
+}
+
+.delete-btn {
+  background: #ef4444;
+  color: white;
 }
 
 /* MODAL */
+/* OVERLAY */
 .modal {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(15, 23, 42, 0.6); /* dark blur feel */
+  backdrop-filter: blur(5px);
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 999;
+  padding: 15px;
 }
 
+/* MODAL BOX */
 .modal-box {
-  background: white;
-  padding: 20px;
-  width: 300px;
-  border-radius: 10px;
+  background: #ffffff;
+  padding: 25px;
+  width: 100%;
+  max-width: 420px;
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+  animation: popupScale 0.3s ease;
 }
 
+/* ANIMATION */
+@keyframes popupScale {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* TITLE */
+.modal-box h3 {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 20px;
+  color: #0f172a;
+}
+
+/* INPUTS */
 .modal-box input,
 .modal-box select {
   width: 100%;
-  margin: 8px 0;
-  padding: 8px;
+  margin: 10px 0;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  transition: 0.3s;
+  font-size: 14px;
 }
 
+.modal-box input:focus,
+.modal-box select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99,102,241,0.2);
+  outline: none;
+}
+
+/* BUTTON AREA */
 .modal-actions {
   display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+/* BUTTON BASE */
+.modal-actions button {
+  flex: 1;
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+/* PRIMARY BUTTON */
+.modal-actions button[type="submit"] {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: white;
+}
+
+.modal-actions button[type="submit"]:hover {
+  transform: scale(1.03);
+}
+
+/* CANCEL BUTTON */
+.modal-actions button[type="button"] {
+  background: #f1f5f9;
+  color: #111;
+}
+
+.modal-actions button[type="button"]:hover {
+  background: #e2e8f0;
+}
+
+/* MOBILE */
+@media (max-width: 500px) {
+  .modal-box {
+    padding: 20px;
+  }
+
+  .modal-actions {
+    flex-direction: column;
+  }
+}
+
+.expense-header {
+  display: flex;
   justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.expense-header h2 {
+  margin: 0;
+}
+
+.expense-header h3 {
+  margin: 5px 0 0;
+}
+
+/* Mobile fix */
+@media (max-width: 600px) {
+  .expense-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+}
+
+/* ========================= */
+/* 📱 MOBILE (≤600px) */
+/* ========================= */
+@media (max-width: 600px) {
+  .expense-page {
+    padding: 15px;
+  }
+
+  .expense-page h2 {
+    font-size: 22px;
+  }
+
+  .expense-page h3 {
+    font-size: 16px;
+  }
+
+  .add-btn {
+    width: 100%;
+  }
+
+  .date-filter {
+    flex-direction: column;
+  }
+
+  .expense-table table {
+    min-width: 100%;
+  }
+
+  /* Convert table to card-like view */
+  .expense-table thead {
+    display: none;
+  }
+
+  .expense-table tbody tr {
+    display: block;
+    margin-bottom: 15px;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 10px;
+    background: white;
+  }
+
+  .expense-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px;
+    border: none;
+  }
+
+  .expense-table td::before {
+    font-weight: bold;
+  }
+
+  .expense-table td:nth-child(1)::before {
+    content: "Title: ";
+  }
+
+  .expense-table td:nth-child(2)::before {
+    content: "Amount: ";
+  }
+
+  .expense-table td:nth-child(3)::before {
+    content: "Category: ";
+  }
+
+  .expense-table td:nth-child(4)::before {
+    content: "Date: ";
+  }
+
+  .expense-table td:nth-child(5)::before {
+    content: "Action: ";
+  }
+}
+
+/* ========================= */
+/* 📱 TABLET (601px–900px) */
+/* ========================= */
+@media (max-width: 900px) {
+  .expense-page {
+    padding: 20px;
+  }
+}
+
+/* ========================= */
+/* 💻 LAPTOP (901px–1200px) */
+/* ========================= */
+@media (max-width: 1200px) {
+  .expense-page {
+    padding: 30px;
+  }
+}
+
+/* ========================= */
+/* 🖥 LARGE SCREEN (>1200px) */
+/* ========================= */
+@media (min-width: 1400px) {
+  .expense-page {
+    padding: 50px 120px;
+  }
+
+  .expense-table {
+    padding: 20px;
+  }
 }

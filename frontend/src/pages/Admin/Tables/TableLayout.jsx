@@ -10,6 +10,7 @@ const tables = Array.from({ length: 12 }, (_, i) => i + 1);
 const TableLayout = () => {
   const { backendUrl } = useContext(ShopContext);
 
+
   const [bookings, setBookings] = useState([]);
   const [selectedTime, setSelectedTime] = useState("Dinner");
   const [selectedDate, setSelectedDate] = useState("");
@@ -22,6 +23,11 @@ const TableLayout = () => {
     const today = new Date().toISOString().split("T")[0];
     setSelectedDate(today);
   }, []);
+
+  useEffect(() => {
+  const slots = getTimeSlots(selectedTime);
+  setTimeSlots(slots);
+}, []);
 
   useEffect(() => {
     fetchBookings();

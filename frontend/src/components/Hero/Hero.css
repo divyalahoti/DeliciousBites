@@ -5,31 +5,38 @@
   width: 100%;
 }
 
+/* TITLE */
 .hero-section h1 {
-  font-size: 50px;
+  font-size: 48px;
   color: #1c3b2f;
   margin-bottom: 40px;
+  line-height: 1.2;
 }
 
+/* IMAGE CONTAINER */
 .hero-images {
   display: flex;
   justify-content: center;
   align-items: center;
   gap: 20px;
+
+  flex-wrap: nowrap; /* desktop */
+  overflow: hidden;
 }
 
 /* ALL IMAGES */
 .hero-images img {
-  width: 200px;
-  height: 250px;
+  width: 180px;
+  height: 220px;
   object-fit: cover;
   border-radius: 15px;
   transition: all 0.5s ease;
-  opacity: 0.7;
-  transform: scale(0.8);
+
+  opacity: 0.6;
+  transform: scale(0.85);
 }
 
-/* ONLY CENTER IMAGE BIG */
+/* CENTER IMAGE */
 .hero-images img.active {
   width: 220px;
   height: 220px;
@@ -38,23 +45,83 @@
   z-index: 2;
 
   animation: zoomInOut 2s ease-in-out infinite;
-}
-
-@keyframes zoomInOut {
-  0% {
-    transform: scale(1.2);
-  }
-  50% {
-    transform: scale(1.35);
-  }
-  100% {
-    transform: scale(1.2);
-  }
-}
-
-.hero-images img {
-  transition: all 0.5s ease;
-}
-.hero-images img.active {
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+/* ANIMATION */
+@keyframes zoomInOut {
+  0% { transform: scale(1.2); }
+  50% { transform: scale(1.35); }
+  100% { transform: scale(1.2); }
+}
+
+/* ========================= */
+/* 📱 MOBILE (≤ 480px) */
+/* ========================= */
+@media (max-width: 480px) {
+
+  .hero-section {
+    padding: 40px 10px;
+  }
+
+  .hero-section h1 {
+    font-size: 26px;
+    margin-bottom: 25px;
+  }
+
+  .hero-images {
+    gap: 10px;
+  }
+
+  .hero-images img {
+    width: 90px;
+    height: 110px;
+    transform: scale(0.9);
+  }
+
+  .hero-images img.active {
+    width: 110px;
+    height: 110px;
+    transform: scale(1.1);
+  }
+}
+
+/* ========================= */
+/* 📱 TABLET (≤ 768px) */
+/* ========================= */
+@media (max-width: 768px) {
+
+  .hero-section h1 {
+    font-size: 34px;
+  }
+
+  .hero-images img {
+    width: 120px;
+    height: 150px;
+  }
+
+  .hero-images img.active {
+    width: 140px;
+    height: 140px;
+  }
+}
+
+/* ========================= */
+/* 💻 LARGE SCREENS (≥ 1200px) */
+/* ========================= */
+@media (min-width: 1200px) {
+
+  .hero-section h1 {
+    font-size: 56px;
+  }
+
+  .hero-images img {
+    width: 200px;
+    height: 250px;
+  }
+
+  .hero-images img.active {
+    width: 240px;
+    height: 240px;
+  }
 }

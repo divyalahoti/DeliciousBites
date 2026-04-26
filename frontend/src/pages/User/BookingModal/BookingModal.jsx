@@ -196,7 +196,13 @@ const BookingModal = () => {
             </select>
 
             <label>Select Date</label>
-            <input type="date" name="date" onChange={handleChange} required />
+            <input
+              type="date"
+              name="date"
+              min={new Date().toISOString().split("T")[0]}
+              onChange={handleChange}
+              required
+            />
             <label>Select Time</label>
             <select name="time" onChange={handleChange} required>
               <option value="">Select Time</option>
@@ -217,6 +223,11 @@ const BookingModal = () => {
             <label>Select Guests</label>
             <input type="number" name="guests" placeholder="Number of Guests" onChange={handleChange} required />
 
+            {selectedTable && (
+              <p style={{ color: "#1c3b2f", fontWeight: "bold" }}>
+                Selected Table: {selectedTable}
+              </p>
+            )}
             {/* TABLE GRID */}
             <div className="table-grid">
               {tables.map((t) => (
@@ -232,7 +243,9 @@ const BookingModal = () => {
               ))}
             </div>
 
-            <button type="submit">Book Table</button>
+            <button type="submit" disabled={!selectedTable}>
+              Book Table
+            </button>
 
           </form>
         </div>

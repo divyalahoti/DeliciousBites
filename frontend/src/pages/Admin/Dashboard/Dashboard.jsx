@@ -13,6 +13,7 @@ const Dashboard = () => {
   const { backendUrl } = useContext(ShopContext);
   const navigate = useNavigate();
 
+
   useEffect(() => {
     fetchData();
     AOS.init({ duration: 1000, once: true });
@@ -34,9 +35,6 @@ const Dashboard = () => {
 
   const totalOrders = orders.length;
 
-  // const totalExpense = expenses.reduce((sum, e) => sum + e.amount, 0);
-
-  // const profit = totalRevenue - totalExpense;
 
   const totalRevenue = orders.reduce((sum, o) => sum + (o.amount || 0), 0
   );
@@ -73,9 +71,6 @@ const Dashboard = () => {
           <h4>Active Tables</h4>
           <p>{bookings.filter(b => b.status === "active").length}</p>
         </div>
-
-
-
       </div>
 
       {/* ACTION CARDS */}
@@ -97,7 +92,7 @@ const Dashboard = () => {
         </div>
 
         <div className="action-card" onClick={() => navigate("/orders")} data-aos="fade-up" data-aos-delay="300">
-          <h3>🧾 Orders</h3>
+          <h3>📊 Total Orders</h3>
           <p>All customer orders</p>
         </div>
 
@@ -112,7 +107,7 @@ const Dashboard = () => {
         </div>
 
         <div className="action-card" onClick={() => navigate("/expenses")} data-aos="fade-up" data-aos-delay="500">
-          <h3>Expenses</h3>
+          <h3>💰 Expenses</h3>
           <p>View Expenses</p>
         </div>
 

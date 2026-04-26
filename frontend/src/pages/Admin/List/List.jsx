@@ -8,6 +8,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const List = ({ token }) => {
+  
   const [list, setList] = useState([]);
   const [search, setSearch] = useState("");
   const { backendUrl, currency } = useContext(ShopContext);

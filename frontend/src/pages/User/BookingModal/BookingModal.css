@@ -1,45 +1,82 @@
+/* SECTION */
 .booking-section {
   padding: 80px 20px;
   background-size: cover;
   background-position: center;
 }
 
-.booking-section h2 {
-  color: white;
-}
-
+/* TITLE */
 .booking-title {
   text-align: center;
-  font-size: 32px;
-  margin-bottom: 40px;
+  font-size: 34px;
+  margin-bottom: 50px;
   color: white;
+  font-weight: 600;
 }
 
+/* CONTAINER */
 .booking-container {
+  max-width: 1200px;
+  margin: auto;
   display: flex;
-  justify-content: center;
+  gap: 40px;
+  align-items: flex-start;
+  justify-content: space-between;
 }
 
+/* LEFT INFO */
 .booking-info {
+  flex: 1;
   color: white;
 }
 
-.table-section h4 {
-  color: white;
-  width: 45;
+.booking-info h3 {
+  font-size: 24px;
+  margin-bottom: 15px;
 }
 
+.booking-info p {
+  font-size: 15px;
+  line-height: 1.6;
+  margin-bottom: 20px;
+}
+
+/* INFO BOX */
+.info-box {
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+/* SOCIAL */
+.social-links {
+  margin-top: 20px;
+  display: flex;
+  gap: 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* RIGHT FORM */
 .booking-form-box {
+  flex: 1;
   background: white;
   padding: 30px;
   border-radius: 20px;
-  width: 400px;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
 }
 
+/* FORM */
 .booking-form {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 14px;
+}
+
+.booking-form label {
+  font-size: 13px;
+  font-weight: 500;
 }
 
 .booking-form input,
@@ -47,9 +84,10 @@
   padding: 12px;
   border-radius: 8px;
   border: 1px solid #ddd;
+  font-size: 14px;
 }
 
-/* GRID */
+/* TABLE GRID */
 .table-grid {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
@@ -59,43 +97,136 @@
 
 /* TABLE BOX */
 .table-box {
-  padding: 15px;
+  padding: 12px;
   text-align: center;
   border-radius: 10px;
   cursor: pointer;
   background: #e0e0e0;
   transition: 0.3s;
+  font-size: 14px;
 }
 
-/* 🟢 AVAILABLE */
+/* AVAILABLE */
 .table-box:hover {
   background: #2ecc71;
   color: white;
 }
 
-/* 🔴 BOOKED */
+/* BOOKED */
 .table-box.booked {
   background: #e74c3c;
   color: white;
   cursor: not-allowed;
 }
 
-/* 🟡 SELECTED */
+/* SELECTED */
 .table-box.selected {
   background: #f1c40f;
   color: black;
 }
 
 /* BUTTON */
-button {
+.booking-form button {
+  margin-top: 10px;
   background: #1c3b2f;
   color: white;
   padding: 12px;
   border-radius: 10px;
   border: none;
   cursor: pointer;
+  transition: 0.3s;
 }
 
-button:hover {
+.booking-form button:hover {
   background: #145a32;
+}
+
+/* ========================= */
+/* 📱 TABLET (≤1024px) */
+/* ========================= */
+@media (max-width: 1024px) {
+
+  .booking-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+  }
+
+  .booking-info {
+    text-align: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+}
+
+/* ========================= */
+/* 📱 MOBILE (≤768px) */
+/* ========================= */
+@media (max-width: 768px) {
+
+  .booking-section {
+    padding: 60px 15px;
+  }
+
+  .booking-title {
+    font-size: 26px;
+  }
+
+  .booking-form-box {
+    padding: 20px;
+  }
+
+  .table-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+/* ========================= */
+/* 📱 SMALL MOBILE (≤480px) */
+/* ========================= */
+@media (max-width: 480px) {
+
+  .booking-title {
+    font-size: 22px;
+  }
+
+  .booking-form input,
+  .booking-form select {
+    padding: 10px;
+    font-size: 13px;
+  }
+
+  .table-grid {
+    grid-template-columns: repeat(3, 1fr);
+    /* 🔥 important */
+  }
+
+  .table-box {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .booking-info h3 {
+    font-size: 20px;
+  }
+
+  .booking-info p {
+    font-size: 13px;
+  }
+}
+
+/* ========================= */
+/* 💻 LARGE SCREEN (≥1200px) */
+/* ========================= */
+@media (min-width: 1200px) {
+
+  .booking-title {
+    font-size: 40px;
+  }
+
+  .booking-form-box {
+    max-width: 450px;
+  }
 }

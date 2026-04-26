@@ -47,7 +47,7 @@ const Hero = () => {
           <img
             key={index}
             src={img}
-            className={index === 3 ? "active" : ""} // middle = index 2
+            className={index === Math.floor(images.length / 2) ? "active" : ""}
           />
         ))}
       </div>

@@ -1,51 +1,128 @@
+/* SECTION */
 .culture {
-  padding: 60px 20px;
+  padding: 70px 20px;
   text-align: center;
   background: #FDF6F3;
 }
 
 .culture h2 {
-  font-size: 40px;
+  font-size: 38px;
   margin-bottom: 40px;
   color: #1c3b2f;
 }
 
-/* SLIDER CONTAINER */
+/* SLIDER */
 .slider {
   overflow: hidden;
   position: relative;
 }
 
-/* MOVING TRACK */
+/* TRACK */
 .slide-track {
   display: flex;
-  width: calc(250px * 12); /* total images */
-  animation: scroll 20s linear infinite;
+  width: calc(200px * 12);
+  /* default (mobile-first) */
+  animation: scroll 25s linear infinite;
 }
 
-/* EACH IMAGE */
+/* SLIDE */
 .slide {
-  width: 250px;
+  width: 200px;
   padding: 10px;
   flex-shrink: 0;
-  transition: transform 0.5s;
+  transition: transform 0.4s ease;
 }
 
-/* IMAGE STYLE */
+/* IMAGE */
 .slide img {
   width: 100%;
-  height: 220px;
-  border-radius: 20px;
+  height: 160px;
+  border-radius: 16px;
   object-fit: cover;
   transition: all 0.4s ease;
 }
 
-/* SMOOTH SCROLL */
+/* HOVER EFFECT */
+.slide:hover img {
+  transform: scale(1.05);
+}
+
+/* ANIMATION */
 @keyframes scroll {
   0% {
     transform: translateX(0);
   }
+
   100% {
     transform: translateX(-50%);
+  }
+}
+
+/* ========================= */
+/* 📱 TABLET (≥768px) */
+/* ========================= */
+@media (min-width: 768px) {
+
+  .culture h2 {
+    font-size: 32px;
+  }
+
+  .slide {
+    width: 220px;
+  }
+
+  .slide img {
+    height: 180px;
+  }
+
+  .slide-track {
+    width: calc(220px * 12);
+    animation: scroll 22s linear infinite;
+  }
+}
+
+/* ========================= */
+/* 💻 LAPTOP (≥1024px) */
+/* ========================= */
+@media (min-width: 1024px) {
+
+  .culture h2 {
+    font-size: 36px;
+  }
+
+  .slide {
+    width: 240px;
+  }
+
+  .slide img {
+    height: 200px;
+  }
+
+  .slide-track {
+    width: calc(240px * 12);
+    animation: scroll 20s linear infinite;
+  }
+}
+
+/* ========================= */
+/* 🖥️ LARGE SCREEN (≥1200px) */
+/* ========================= */
+@media (min-width: 1200px) {
+
+  .culture h2 {
+    font-size: 42px;
+  }
+
+  .slide {
+    width: 260px;
+  }
+
+  .slide img {
+    height: 220px;
+  }
+
+  .slide-track {
+    width: calc(260px * 12);
+    animation: scroll 18s linear infinite;
   }
 }

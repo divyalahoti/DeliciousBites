@@ -9,6 +9,7 @@ import "aos/dist/aos.css";
 
 const Add = ({ token }) => {
 
+
   const { backendUrl } = useContext(ShopContext);
   const location = useLocation();
   const editData = location.state;
@@ -94,21 +95,28 @@ const Add = ({ token }) => {
   return (
     <div className="add-container">
 
-      <h2 className="page-title" data-aos="fade-down">
-        {isEdit ? "✏️ Edit Menu Item" : "➕ Add New Item"}
-      </h2>
+
 
       <form onSubmit={onSubmitHandler} className="add-card">
-
+        <h2 className="page-title" data-aos="fade-down">
+          {isEdit ? "✏️ Edit Menu Item" : "➕ Add New Item"}
+        </h2>
         {/* IMAGE */}
-        <div className="image-box" data-aos="zoom-in">
+        {/* <div className="image-box" data-aos="zoom-in"> */}
+        <div className="image-box" onClick={() => document.getElementById("fileInput").click()} data-aos="zoom-in">
           {preview ? (
             <img src={preview} alt="preview" />
           ) : (
             <p>Upload Image</p>
           )}
 
+          {/* <input
+            type="file"
+            onChange={(e) => handleImage(e.target.files[0])}
+          /> */}
+
           <input
+            id="fileInput"
             type="file"
             onChange={(e) => handleImage(e.target.files[0])}
           />

@@ -2,6 +2,9 @@
   padding: 40px 20px;
   background: #f4f6f9;
   min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  margin-top: 30px;
 }
 
 /* TITLE */
@@ -14,18 +17,19 @@
 
 /* CARD */
 .add-card {
-  max-width: 700px;
-  margin: auto;
+  width: 100%;
+  max-width: 750px;
   background: white;
   padding: 30px;
   border-radius: 16px;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+  transition: 0.3s;
 }
 
 /* IMAGE */
 .image-box {
   width: 100%;
-  height: 180px;
+  height: 200px;
   border: 2px dashed #ddd;
   border-radius: 12px;
   display: flex;
@@ -64,23 +68,29 @@
 }
 
 /* INPUTS */
-input, select, textarea {
+input,
+select,
+textarea {
   padding: 12px;
   border: 1px solid #ddd;
   border-radius: 10px;
   outline: none;
   transition: 0.3s;
+  font-size: 14px;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
   border-color: #111;
-  box-shadow: 0 0 0 2px rgba(0,0,0,0.05);
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.05);
 }
 
 textarea {
   width: 100%;
-  min-height: 100px;
+  min-height: 110px;
   margin-bottom: 15px;
+  resize: none;
 }
 
 /* BUTTON */
@@ -100,9 +110,90 @@ textarea {
   transform: scale(1.03);
 }
 
-/* 📱 MOBILE */
-@media (max-width: 768px) {
+/* ========================= */
+/* 📱 MOBILE (≤ 600px) */
+/* ========================= */
+@media (max-width: 600px) {
+  .add-container {
+    padding: 20px 10px;
+  }
+
+  .add-card {
+    padding: 20px;
+    border-radius: 12px;
+  }
+
+  .page-title {
+    font-size: 22px;
+  }
+
   .form-grid {
     grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .image-box {
+    height: 150px;
+  }
+
+  input,
+  select,
+  textarea {
+    font-size: 13px;
+    padding: 10px;
+  }
+
+  .submit-btn {
+    font-size: 14px;
+    padding: 12px;
+  }
+}
+
+/* ========================= */
+/* 📲 TABLET (601px - 900px) */
+/* ========================= */
+@media (min-width: 601px) and (max-width: 900px) {
+  .add-card {
+    max-width: 600px;
+    padding: 25px;
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .image-box {
+    height: 180px;
+  }
+}
+
+/* ========================= */
+/* 💻 LAPTOP (901px - 1200px) */
+/* ========================= */
+@media (min-width: 901px) and (max-width: 1200px) {
+  .add-card {
+    max-width: 700px;
+  }
+
+  .image-box {
+    height: 200px;
+  }
+}
+
+/* ========================= */
+/* 🖥️ LARGE SCREEN (1200px+) */
+/* ========================= */
+@media (min-width: 1200px) {
+  .add-card {
+    max-width: 800px;
+    padding: 35px;
+  }
+
+  .page-title {
+    font-size: 32px;
+  }
+
+  .image-box {
+    height: 220px;
   }
 }

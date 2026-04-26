@@ -13,16 +13,18 @@ const Home = () => {
   return (
     <>
       <section id="home">
-        <Hero />
+        <Hero /> 
       </section>
 
       <section id="breakfast">
         <MenuSection />
       </section>
 
+
       <section id="lunch">
         <LunchMenuSection />
       </section>
+
 
       <section id="dinner">
         <DinnerMenuSection />
@@ -31,10 +33,12 @@ const Home = () => {
       <section id="testimonial">
         <Testimonial />
       </section>
+    
 
       <section id="culture">
        <Culture/>
       </section>
+       
 
       {/* ✅ Booking Table SECTION */}
       <section id="bookingTbl">

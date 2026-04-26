@@ -1,8 +1,7 @@
+/* SECTION */
 .testimonial {
-  /* background: linear-gradient(135deg, #f7a531, #fcd34d); */
   background: #efe4db;
   padding: 80px 20px;
-  border-radius: 20px;
 }
 
 /* CONTAINER */
@@ -10,23 +9,21 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
-  gap: 40px;
-  flex-wrap: wrap;
+  gap: 50px;
 }
 
 /* TEXT */
 .testimonial-text {
   flex: 1;
-  min-width: 300px;
 }
 
 .quote {
-  font-size: 20px;
-  line-height: 1.6;
+  font-size: 22px;
+  line-height: 1.7;
   color: #333;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   animation: fade 0.5s ease;
 }
 
@@ -56,7 +53,7 @@
 
 /* DOTS */
 .dots {
-  margin-top: 15px;
+  margin-top: 20px;
 }
 
 .dots span {
@@ -83,35 +80,128 @@
 }
 
 .testimonial-image img {
-  width: 280px;
-  height: 280px;
+  width: 320px;
+  height: 320px;
   object-fit: cover;
   border-radius: 20px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
   animation: zoom 3s infinite;
 }
 
-/* ANIMATIONS */
+/* ANIMATION */
 @keyframes fade {
-  from { opacity: 0; transform: translateY(10px);}
-  to { opacity: 1; transform: translateY(0);}
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 @keyframes zoom {
-  0% { transform: scale(1);}
-  50% { transform: scale(1.05);}
-  100% { transform: scale(1);}
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
 
-/* RESPONSIVE */
-@media (max-width: 768px) {
-  .testimonial-container {
-    flex-direction: column;
-    text-align: center;
+/* ========================= */
+/* 💻 LARGE SCREEN (≥1200px) */
+/* ========================= */
+@media (min-width: 1200px) {
+  .quote {
+    font-size: 24px;
   }
 
   .testimonial-image img {
-    width: 200px;
-    height: 200px;
+    width: 360px;
+    height: 360px;
+  }
+}
+
+/* ========================= */
+/* 📱 TABLET (≤ 1024px) */
+/* ========================= */
+@media (max-width: 1024px) {
+
+  .testimonial-container {
+    gap: 30px;
+  }
+
+  .quote {
+    font-size: 20px;
+  }
+
+  .testimonial-image img {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+/* ========================= */
+/* 📱 MOBILE (≤ 768px) */
+/* ========================= */
+@media (max-width: 768px) {
+
+  .testimonial {
+    padding: 60px 15px;
+  }
+
+  .testimonial-container {
+    flex-direction: column-reverse;
+    /* 🔥 image below text */
+    text-align: center;
+    gap: 25px;
+  }
+
+  .quote {
+    font-size: 18px;
+  }
+
+  .profile {
+    justify-content: center;
+  }
+
+  .testimonial-image img {
+    width: 220px;
+    height: 220px;
+  }
+}
+
+/* ========================= */
+/* 📱 SMALL MOBILE (≤480px) */
+/* ========================= */
+@media (max-width: 480px) {
+
+  .quote {
+    font-size: 16px;
+  }
+
+  .testimonial-image img {
+    width: 180px;
+    height: 180px;
+  }
+
+  .profile img {
+    width: 45px;
+    height: 45px;
+  }
+
+  .profile h5 {
+    font-size: 14px;
+  }
+
+  .profile span {
+    font-size: 12px;
   }
 }

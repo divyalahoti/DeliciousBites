@@ -1,38 +1,158 @@
 .myorders-page {
-  padding: 30px;
+  padding: 30px 20px;
+  background: #f8fafc;
+  min-height: 100vh;
 }
 
+/* TITLE */
+.myorders-page h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 25px;
+  color: #0f172a;
+}
+
+/* GRID */
 .orders-container {
   display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 20px;
 }
 
+/* CARD */
 .order-card {
   background: white;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  padding: 18px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.06);
+  transition: 0.3s;
 }
 
+.order-card:hover {
+  transform: translateY(-5px);
+}
+
+/* TOP */
 .order-top {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 10px;
+  align-items: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  gap: 6px;
 }
 
+/* STATUS */
 .status {
-  background: #eee;
-  padding: 4px 10px;
-  border-radius: 8px;
+  background: #e0f2fe;
+  color: #0369a1;
+  padding: 5px 12px;
+  border-radius: 20px;
   font-size: 12px;
+  font-weight: 500;
+}
+
+/* ITEMS */
+.order-items {
+  margin: 10px 0;
 }
 
 .order-items p {
-  margin: 3px 0;
+  margin: 4px 0;
+  font-size: 14px;
+  color: #334155;
 }
 
+/* BOTTOM */
 .order-bottom {
   display: flex;
   justify-content: space-between;
-  margin-top: 10px;
+  align-items: center;
+  margin-top: 15px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.order-bottom h3 {
+  font-size: 18px;
+  color: #111;
+}
+
+.order-bottom p {
+  font-size: 13px;
+  color: #64748b;
+}
+
+/* ========================= */
+/* 📱 MOBILE (≤ 576px) */
+/* ========================= */
+@media (max-width: 576px) {
+
+  .myorders-page {
+    padding: 20px 12px;
+  }
+
+  .myorders-page h2 {
+    font-size: 22px;
+  }
+
+  .order-card {
+    padding: 15px;
+  }
+
+  .order-items p {
+    font-size: 13px;
+  }
+
+  .order-bottom h3 {
+    font-size: 16px;
+  }
+}
+.status.order.placed{
+   background: #dcfce7;
+  color:#64748b;
+}
+.status.delivered {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.status.pending {
+  background: #fef9c3;
+  color: #854d0e;
+}
+
+.status.cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+/* ========================= */
+/* 📲 TABLET (577px - 992px) */
+/* ========================= */
+@media (min-width: 577px) and (max-width: 992px) {
+
+  .orders-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ========================= */
+/* 💻 LAPTOP (993px - 1200px) */
+/* ========================= */
+@media (min-width: 993px) and (max-width: 1200px) {
+
+  .orders-container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* ========================= */
+/* 🖥 LARGE SCREENS (1200px+) */
+/* ========================= */
+@media (min-width: 1200px) {
+
+  .orders-container {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }

@@ -5,6 +5,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const Cart = () => {
+
   const {
     products,
     cartItems,
@@ -14,6 +15,8 @@ const Cart = () => {
     clearCart,
     navigate
   } = useContext(ShopContext);
+
+
 
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
@@ -55,7 +58,17 @@ const Cart = () => {
 
                     {/* QUANTITY */}
                     <div className="qty-box">
-                      <button onClick={() => updateQuantity(itemId, cartItems[itemId] - 1)}>-</button>
+                      <button
+                        onClick={() => {
+                          if (cartItems[itemId] <= 1) {
+                            removeFromCart(itemId);
+                          } else {
+                            updateQuantity(itemId, cartItems[itemId] - 1);
+                          }
+                        }}
+                      >
+                        -
+                      </button>
                       <span>{cartItems[itemId]}</span>
                       <button onClick={() => updateQuantity(itemId, cartItems[itemId] + 1)}>+</button>
                     </div>
