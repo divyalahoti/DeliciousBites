@@ -33,6 +33,7 @@ const Login = ({ setToken }) => {
       if (response.data.success) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
+        window.dispatchEvent(new Event("storage"));
         setToken(response.data.token);
 
         if (response.data.user.role === "admin") {

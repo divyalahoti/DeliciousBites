@@ -12,16 +12,23 @@ const Navbar = ({ setToken }) => {
   const navigate = useNavigate();
   const { getCartCount } = useContext(ShopContext);
 
-  useEffect(() => {
-    const storedUser = localStorage.getItem("user");
-    setUser(storedUser ? JSON.parse(storedUser) : null);
-  }, []);
+
 
   useEffect(() => {
-    const closeDropdown = () => setDropdownOpen(false);
-    window.addEventListener("click", closeDropdown);
-    return () => window.removeEventListener("click", closeDropdown);
+    const loadUser = () => {
+      const storedUser = localStorage.getItem("user");
+      setUser(storedUser ? JSON.parse(storedUser) : null);
+    };
+
+    loadUser();
+
+    // 🔥 update when login/logout happens
+    window.addEventListener("storage", loadUser);
+
+    return () => window.removeEventListener("storage", loadUser);
   }, []);
+
+  console.log(JSON.parse(localStorage.getItem("user")));
 
   const handleLogout = () => {
     localStorage.clear();
@@ -60,39 +67,92 @@ const Navbar = ({ setToken }) => {
       {/* RIGHT (DESKTOP) */}
       <div className="nav-right">
         {user ? (
+          // <div className="profile">
+          //   <span
+          //     onClick={(e) => {
+          //       e.stopPropagation();
+
+          //       if (user.role === "admin") {
+          //         navigate("/dashboard");
+          //       } else {
+          //         setDropdownOpen(!dropdownOpen);
+          //       }
+          //     }}
+          //   >
+          //     👤  {user.role === "admin" ? "Admin Panel" : user.name}
+
+
+          //   </span>
+          //     <button className="logout-btn" onClick={handleLogout}>
+          //       🚪 Logout
+          //     </button>
+
+          //   <div className={`profile-dropdown ${dropdownOpen ? "show" : ""}`}>
+
+          //     {user.role !== "admin" && (
+          //       <Link to="/cart" className="dropdown-item">
+          //         🛒 <span>Cart</span>
+          //         <span className="count">{getCartCount()}</span>
+          //       </Link>
+          //     )}
+
+          //     {user.role === "admin" && (
+          //       <div
+          //         className="dropdown-item"
+          //         onClick={() => navigate("/dashboard")}
+          //       >
+          //         ⚙️ <span>Admin Panel</span>
+          //       </div>
+          //     )}
+
+          //     <div className="dropdown-divider"></div>
+
+          //     <button className="dropdown-item logout-btn" onClick={handleLogout}>
+          //       🚪 Logout
+          //     </button>
+
+          //   </div>
+          // </div>
+
           <div className="profile">
-            <span onClick={(e) => {
-              e.stopPropagation();
-              setDropdownOpen(!dropdownOpen);
-            }}>
-            👤 {user.name}
+            <span
+              onClick={(e) => {
+                e.stopPropagation();
+
+                if (user.role === "admin") {
+                  navigate("/dashboard");
+                } else {
+                  setDropdownOpen(!dropdownOpen);
+                }
+              }}
+            >
+              👤 {user.role === "admin" ? "Admin Panel" : `Hi, ${user.name}`}
             </span>
 
-            <div className={`profile-dropdown ${dropdownOpen ? "show" : ""}`}>
+            {/* ✅ ONLY for normal user dropdown */}
+            {user.role !== "admin" && (
+              <div className={`profile-dropdown ${dropdownOpen ? "show" : ""}`}>
 
-              {user.role !== "admin" && (
                 <Link to="/cart" className="dropdown-item">
-                  🛒 <span>Cart</span>
+                  🛒 Cart
                   <span className="count">{getCartCount()}</span>
                 </Link>
-              )}
 
-              {user.role === "admin" && (
-                <div
-                  className="dropdown-item"
-                  onClick={() => navigate("/dashboard")}
-                >
-                  ⚙️ <span>Admin Panel</span>
-                </div>
-              )}
+                <div className="dropdown-divider"></div>
 
-              <div className="dropdown-divider"></div>
+                <button className="dropdown-item logout-btn" onClick={handleLogout}>
+                  🚪 Logout
+                </button>
 
-              <button className="dropdown-item logout-btn" onClick={handleLogout}>
-                🚪 Logout
+              </div>
+            )}
+
+            {/* ✅ ADMIN LOGOUT BUTTON (SEPARATE) */}
+            {user.role === "admin" && (
+              <button className="admin-logout-btn" onClick={handleLogout}>
+                Logout
               </button>
-
-            </div>
+            )}
           </div>
         ) : (
           <button className="login-btn" onClick={() => navigate("/login")}>
@@ -101,7 +161,9 @@ const Navbar = ({ setToken }) => {
         )}
       </div>
 
+
       {/* MOBILE SIDEBAR */}
+      {menuOpen && <div className="overlay" onClick={() => setMenuOpen(false)}></div>}
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <div className="mobile-header">
           <FaTimes onClick={() => setMenuOpen(false)} />
@@ -123,7 +185,9 @@ const Navbar = ({ setToken }) => {
             )}
 
             <div className="mobile-user">
-              <span>{user.name}</span>
+              <span>
+                👤 Hi, {user.role === "admin" ? "Admin Panel" : user.name}
+              </span>
               <button onClick={handleLogout}>Logout</button>
             </div>
           </>
