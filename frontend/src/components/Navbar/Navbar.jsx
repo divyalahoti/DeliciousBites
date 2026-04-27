@@ -1,7 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import cart_icon from "../../assets/cart_icon.jpg";
 import { ShopContext } from "../../deliciousBitesContext/ShopContext";
 import { FaBars, FaTimes } from "react-icons/fa";
 
@@ -13,28 +12,19 @@ const Navbar = ({ setToken }) => {
   const navigate = useNavigate();
   const { getCartCount } = useContext(ShopContext);
 
-  // ✅ FIX: Listen for login/logout changes
-  // useEffect(() => {
-  //   const loadUser = () => {
-  //     const storedUser = localStorage.getItem("user");
-  //     setUser(storedUser ? JSON.parse(storedUser) : null);
-  //   };
-
-  //   loadUser();
-
-  //   window.addEventListener("storage", loadUser); // auto update
-  //   return () => window.removeEventListener("storage", loadUser);
-  // }, []);
   useEffect(() => {
-  const storedUser = localStorage.getItem("user");
-  setUser(storedUser ? JSON.parse(storedUser) : null);
-}, []);
+    const storedUser = localStorage.getItem("user");
+    setUser(storedUser ? JSON.parse(storedUser) : null);
+  }, []);
 
-  // ✅ LOGOUT
+  useEffect(() => {
+    const closeDropdown = () => setDropdownOpen(false);
+    window.addEventListener("click", closeDropdown);
+    return () => window.removeEventListener("click", closeDropdown);
+  }, []);
+
   const handleLogout = () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
-    setUser(null);
+    localStorage.clear();
     setToken("");
     navigate("/login");
   };
@@ -44,85 +34,102 @@ const Navbar = ({ setToken }) => {
 
       {/* LEFT */}
       <div className="nav-left">
-        <div className="menu-icon" onClick={() => setMenuOpen(!menuOpen)}>
-          {menuOpen ? <FaTimes /> : <FaBars />}
+        <div className="menu-icon" onClick={() => setMenuOpen(true)}>
+          <FaBars />
         </div>
-        <h3 onClick={() => navigate("/")}>🍽 Delicious Bites</h3>
+        <h2 className="logo" onClick={() => navigate("/")}>
+          🍽 Delicious Bites
+        </h2>
       </div>
 
-      {/* CENTER */}
-      <ul className={`nav-center ${menuOpen ? "active" : ""}`}>
-
-        <li onClick={() => setMenuOpen(false)}>
-          <Link to="/#home">Home</Link>
-        </li>
-
-        {/* DROPDOWN */}
+      {/* CENTER (DESKTOP) */}
+      <ul className="nav-center">
+        <li><Link to="/">Home</Link></li>
         <li className="dropdown">
-          <div
-            className="menu-btn"
-            onClick={() => setDropdownOpen(!dropdownOpen)}
-          >
-            Menu
-          </div>
-
-          <div className={`dropdown-menu ${dropdownOpen ? "show" : ""}`}>
-            <Link to="/breakfast" onClick={() => setMenuOpen(false)}>Breakfast</Link>
-            <Link to="/lunch" onClick={() => setMenuOpen(false)}>Lunch</Link>
-            <Link to="/dinner" onClick={() => setMenuOpen(false)}>Dinner</Link>
+          <span>Menu</span>
+          <div className="dropdown-menu">
+            <Link to="/breakfast">Breakfast</Link>
+            <Link to="/lunch">Lunch</Link>
+            <Link to="/dinner">Dinner</Link>
           </div>
         </li>
-
-        <li onClick={() => setMenuOpen(false)}>
-          <Link to="/bookingTbl">Book a Table</Link>
-        </li>
-
-        {/* ✅ MY ORDERS */}
-        {user && user.role !== "admin" && (
-          <li onClick={() => setMenuOpen(false)}>
-            <Link to="/my-orders">My Orders</Link>
-          </li>
-        )}
+        <li><Link to="/bookingTbl">Book a Table</Link></li>
+        {user && <li><Link to="/my-orders">My Orders</Link></li>}
       </ul>
 
-      {/* RIGHT */}
+      {/* RIGHT (DESKTOP) */}
       <div className="nav-right">
-
-        {/* ✅ CART */}
-        {user && user.role !== "admin" && (
-          <Link to="/cart" className="cart-icon">
-            <img src={cart_icon} alt="cart" />
-            {getCartCount() > 0 && (
-              <span className="cart-count">{getCartCount()}</span>
-            )}
-          </Link>
-        )}
-
-        {/* ✅ LOGIN */}
-        {!user ? (
-          <Link to="/login">
-            <button className="call-btn">Login</button>
-          </Link>
-        ) : (
-          <>
-            {/* ✅ USER / ADMIN */}
-            <span
-              className="user-name"
-              onClick={() =>
-                user?.role === "admin" && navigate("/dashboard")
-              }
-            >
-              {user?.role === "admin" ? "Admin Panel" : user?.name}
+        {user ? (
+          <div className="profile">
+            <span onClick={(e) => {
+              e.stopPropagation();
+              setDropdownOpen(!dropdownOpen);
+            }}>
+            👤 {user.name}
             </span>
 
-            {/* ✅ LOGOUT */}
-            <button className="logout-btn" onClick={handleLogout}>
-              Logout
-            </button>
+            <div className={`profile-dropdown ${dropdownOpen ? "show" : ""}`}>
+
+              {user.role !== "admin" && (
+                <Link to="/cart" className="dropdown-item">
+                  🛒 <span>Cart</span>
+                  <span className="count">{getCartCount()}</span>
+                </Link>
+              )}
+
+              {user.role === "admin" && (
+                <div
+                  className="dropdown-item"
+                  onClick={() => navigate("/dashboard")}
+                >
+                  ⚙️ <span>Admin Panel</span>
+                </div>
+              )}
+
+              <div className="dropdown-divider"></div>
+
+              <button className="dropdown-item logout-btn" onClick={handleLogout}>
+                🚪 Logout
+              </button>
+
+            </div>
+          </div>
+        ) : (
+          <button className="login-btn" onClick={() => navigate("/login")}>
+            Login
+          </button>
+        )}
+      </div>
+
+      {/* MOBILE SIDEBAR */}
+      <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
+        <div className="mobile-header">
+          <FaTimes onClick={() => setMenuOpen(false)} />
+        </div>
+
+        <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
+        <Link to="/breakfast" onClick={() => setMenuOpen(false)}>Breakfast</Link>
+
+        <Link to="/lunch" onClick={() => setMenuOpen(false)} >Lunch</Link>
+        <Link to="/dinner" onClick={() => setMenuOpen(false)}>Dinner</Link>
+        <Link to="/bookingTbl" onClick={() => setMenuOpen(false)}>Book a Table</Link>
+
+        {user && (
+          <>
+            <Link to="/my-orders">My Orders</Link>
+
+            {user.role !== "admin" && (
+              <Link to="/cart">🛒 Cart ({getCartCount()})</Link>
+            )}
+
+            <div className="mobile-user">
+              <span>{user.name}</span>
+              <button onClick={handleLogout}>Logout</button>
+            </div>
           </>
         )}
-
       </div>
+
     </header>
   );
 };

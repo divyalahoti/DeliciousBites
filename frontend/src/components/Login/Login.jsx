@@ -39,8 +39,8 @@ const Login = ({ setToken }) => {
           navigate("/dashboard");
         } else {
           localStorage.setItem("user", JSON.stringify(response.data.user));
-        setToken(response.data.token);
-        window.location.reload();
+          setToken(response.data.token);
+          // window.location.reload();
           navigate("/");
         }
       } else {

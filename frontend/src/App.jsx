@@ -35,6 +35,7 @@ import TableLayout from "./pages/Admin/Tables/TableLayout";
 import Expenses from "./pages/Admin/Expenses/Expenses";
 import Report from "./pages/Admin/Report/Report";
 import ScrollToTop from "./components/ScrollToTop";
+import "../src/App.css"
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem("token") || "");
@@ -53,7 +54,7 @@ function App() {
   }, []);
 
   return (
-    <div className="px-4 sm:px-[5vw] md:px-[7vw] lg:px-[9vw]">
+    <div className="app-container">
       <ScrollToTop />
       <Navbar setToken={setToken} />
       <ToastContainer />
