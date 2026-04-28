@@ -11,15 +11,15 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { getCartCount, user, setUser, token, setToken } = useContext(ShopContext);
 
-  useEffect(() => {
-    const loadUser = () => {
-      const storedUser = localStorage.getItem("user");
-      setUser(storedUser ? JSON.parse(storedUser) : null);
-    };
-    loadUser();
-    window.addEventListener("storage", loadUser);
-    return () => window.removeEventListener("storage", loadUser);
-  }, []);
+  // useEffect(() => {
+  //   const loadUser = () => {
+  //     // const storedUser = localStorage.getItem("user");
+  //     // setUser(storedUser ? JSON.parse(storedUser) : null);w
+  //   };
+  //   loadUser();
+  //   window.addEventListener("storage", loadUser);
+  //   return () => window.removeEventListener("storage", loadUser);
+  // }, []);
 
   const handleLogout = () => {
     setToken("");
@@ -153,13 +153,61 @@ const Navbar = () => {
         </div>
 
         {/* 2. This footer stays at the VERY bottom and is NOT inside the scrollable wrapper */}
-        {user && (
+        {/* {user && (
           <div className="mobile-user-footer">
             <div className="mobile-user-info">
               <span>👤 {user.role === "admin" ? "Admin Panel" : `Hi, ${user.name}`}</span>
             </div>
             <button className="mobile-logout-btn" onClick={handleLogout}>
               Logout
+            </button>
+
+            <button className="login-btn" onClick={() => navigate("/login")}>Login</button>
+          </div>
+        )} */}
+
+        {user && token ? (
+          <div className="mobile-user-footer">
+            <div className="mobile-user-info">
+              <span>
+                👤 {user.role === "admin" ? "Admin Panel" : `Hi, ${user.name}`}
+              </span>
+            </div>
+
+            {/* USER (not admin) */}
+            {user.role !== "admin" && (
+              <Link to="/cart" onClick={closeAllMenus} className="mobile-cart-btn">
+                🛒 Cart ({getCartCount()})
+              </Link>
+            )}
+
+            {/* ADMIN */}
+            {user.role === "admin" && (
+              <button
+                className="mobile-admin-btn"
+                onClick={() => {
+                  navigate("/dashboard");
+                  closeAllMenus();
+                }}
+              >
+                Go to Dashboard
+              </button>
+            )}
+
+            <button className="mobile-logout-btn" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
+        ) : (
+          <div className="mobile-user-footer">
+            <button
+              className="mobile-login-btn"
+              onClick={() => {
+                navigate("/login");
+                closeAllMenus();
+              }}
+            >
+              Login
             </button>
           </div>
         )}
