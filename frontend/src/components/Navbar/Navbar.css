@@ -365,7 +365,7 @@
 
   .mobile-cart-btn {
     background: #1c3b2f;
-    color: white;
+    color: white!important;
   }
 
   .mobile-admin-btn {

@@ -12,7 +12,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [currentState, setCurrentState] = useState("Login");
-  const { backendUrl ,setUser,setToken} = useContext(ShopContext);
+  const { backendUrl ,setUser,setToken,token} = useContext(ShopContext);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
