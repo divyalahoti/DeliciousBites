@@ -7,12 +7,12 @@ import { ShopContext } from "../../deliciousBitesContext/ShopContext";
 import { toast } from "react-toastify";
 
 
-const Login = ({ setToken }) => {
+const Login = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [currentState, setCurrentState] = useState("Login");
-  const { backendUrl } = useContext(ShopContext);
+  const { backendUrl ,setUser,setToken} = useContext(ShopContext);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,16 +31,21 @@ const Login = ({ setToken }) => {
       });
 
       if (response.data.success) {
+        console.log(response.data)
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", JSON.stringify(response.data.user));
         window.dispatchEvent(new Event("storage"));
         setToken(response.data.token);
+        setUser(response.data.user);
+
 
         if (response.data.user.role === "admin") {
           navigate("/dashboard");
         } else {
           localStorage.setItem("user", JSON.stringify(response.data.user));
           setToken(response.data.token);
+          setUser(response.data.user);
+
           // window.location.reload();
           navigate("/");
         }

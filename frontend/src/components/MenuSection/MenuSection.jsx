@@ -7,7 +7,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 const MenuSection = () => {
-  const { products, addToCart, navigate } = useContext(ShopContext);
+  const { products, addToCart, navigate,user } = useContext(ShopContext);
   const [orders, setOrders] = useState([]);
   const [loadingId, setLoadingId] = useState(null);
 
@@ -15,9 +15,6 @@ const MenuSection = () => {
   const placeOrder = async (item) => {
     try {
       setLoadingId(item._id);
-
-      const user = JSON.parse(localStorage.getItem("user"));
-
       if (!user || !user._id) {
         navigate("/login")
         return;

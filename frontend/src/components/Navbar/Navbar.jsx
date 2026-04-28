@@ -4,42 +4,42 @@ import "./Navbar.css";
 import { ShopContext } from "../../deliciousBitesContext/ShopContext";
 import { FaBars, FaTimes } from "react-icons/fa";
 
-const Navbar = ({ setToken }) => {
-  const [user, setUser] = useState(null);
+const Navbar = () => {
+  // const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const navigate = useNavigate();
-  const { getCartCount } = useContext(ShopContext);
-
-
+  const { getCartCount,user , setUser,token,setToken} = useContext(ShopContext);
 
   useEffect(() => {
     const loadUser = () => {
       const storedUser = localStorage.getItem("user");
       setUser(storedUser ? JSON.parse(storedUser) : null);
     };
-
     loadUser();
-
-    // 🔥 update when login/logout happens
     window.addEventListener("storage", loadUser);
-
     return () => window.removeEventListener("storage", loadUser);
   }, []);
 
-  console.log(JSON.parse(localStorage.getItem("user")));
-
   const handleLogout = () => {
-    localStorage.clear();
     setToken("");
+    setUser("");
+    localStorage.clear();
+
+    setDropdownOpen(false); // Close dropdown on logout
+    setMenuOpen(false);     // Close mobile menu on logout
     navigate("/login");
+  };
+
+  // Helper to close everything
+  const closeAllMenus = () => {
+    setMenuOpen(false);
+    setDropdownOpen(false);
   };
 
   return (
     <header className="navbar">
-
-      {/* LEFT */}
       <div className="nav-left">
         <div className="menu-icon" onClick={() => setMenuOpen(true)}>
           <FaBars />
@@ -49,153 +49,92 @@ const Navbar = ({ setToken }) => {
         </h2>
       </div>
 
-      {/* CENTER (DESKTOP) */}
       <ul className="nav-center">
         <li><Link to="/">Home</Link></li>
         <li className="dropdown">
-          <span>Menu</span>
+          <span className="menu-trigger">Menu ▾</span>
           <div className="dropdown-menu">
-            <Link to="/breakfast">Breakfast</Link>
-            <Link to="/lunch">Lunch</Link>
-            <Link to="/dinner">Dinner</Link>
+            <Link to="/breakfast" onClick={closeAllMenus}>Breakfast</Link>
+            <Link to="/lunch" onClick={closeAllMenus}>Lunch</Link>
+            <Link to="/dinner" onClick={closeAllMenus}>Dinner</Link>
           </div>
         </li>
         <li><Link to="/bookingTbl">Book a Table</Link></li>
         {user && <li><Link to="/my-orders">My Orders</Link></li>}
       </ul>
 
-      {/* RIGHT (DESKTOP) */}
       <div className="nav-right">
-        {user ? (
-          // <div className="profile">
-          //   <span
-          //     onClick={(e) => {
-          //       e.stopPropagation();
-
-          //       if (user.role === "admin") {
-          //         navigate("/dashboard");
-          //       } else {
-          //         setDropdownOpen(!dropdownOpen);
-          //       }
-          //     }}
-          //   >
-          //     👤  {user.role === "admin" ? "Admin Panel" : user.name}
-
-
-          //   </span>
-          //     <button className="logout-btn" onClick={handleLogout}>
-          //       🚪 Logout
-          //     </button>
-
-          //   <div className={`profile-dropdown ${dropdownOpen ? "show" : ""}`}>
-
-          //     {user.role !== "admin" && (
-          //       <Link to="/cart" className="dropdown-item">
-          //         🛒 <span>Cart</span>
-          //         <span className="count">{getCartCount()}</span>
-          //       </Link>
-          //     )}
-
-          //     {user.role === "admin" && (
-          //       <div
-          //         className="dropdown-item"
-          //         onClick={() => navigate("/dashboard")}
-          //       >
-          //         ⚙️ <span>Admin Panel</span>
-          //       </div>
-          //     )}
-
-          //     <div className="dropdown-divider"></div>
-
-          //     <button className="dropdown-item logout-btn" onClick={handleLogout}>
-          //       🚪 Logout
-          //     </button>
-
-          //   </div>
-          // </div>
-
+        {user  && token? (
           <div className="profile">
-            <span
-              onClick={(e) => {
-                e.stopPropagation();
-
-                if (user.role === "admin") {
-                  navigate("/dashboard");
-                } else {
-                  setDropdownOpen(!dropdownOpen);
-                }
-              }}
-            >
+            <span onClick={(e) => {
+              e.stopPropagation();
+              if (user.role === "admin") {
+                navigate("/dashboard");
+              } else {
+                setDropdownOpen(!dropdownOpen);
+              }
+            }}>
               👤 {user.role === "admin" ? "Admin Panel" : `Hi, ${user.name}`}
             </span>
 
-            {/* ✅ ONLY for normal user dropdown */}
             {user.role !== "admin" && (
               <div className={`profile-dropdown ${dropdownOpen ? "show" : ""}`}>
-
-                <Link to="/cart" className="dropdown-item">
-                  🛒 Cart
-                  <span className="count">{getCartCount()}</span>
+                <Link to="/cart" className="dropdown-item" onClick={() => setDropdownOpen(false)}>
+                  🛒 Cart <span className="count">{getCartCount()}</span>
                 </Link>
-
                 <div className="dropdown-divider"></div>
-
                 <button className="dropdown-item logout-btn" onClick={handleLogout}>
                   🚪 Logout
                 </button>
-
               </div>
             )}
 
-            {/* ✅ ADMIN LOGOUT BUTTON (SEPARATE) */}
             {user.role === "admin" && (
-              <button className="admin-logout-btn" onClick={handleLogout}>
-                Logout
-              </button>
+              <button className="admin-logout-btn" onClick={handleLogout}>Logout</button>
             )}
           </div>
         ) : (
-          <button className="login-btn" onClick={() => navigate("/login")}>
-            Login
-          </button>
+          <button className="login-btn" onClick={() => navigate("/login")}>Login</button>
         )}
       </div>
 
-
       {/* MOBILE SIDEBAR */}
       {menuOpen && <div className="overlay" onClick={() => setMenuOpen(false)}></div>}
+
+
       <div className={`mobile-menu ${menuOpen ? "open" : ""}`}>
         <div className="mobile-header">
           <FaTimes onClick={() => setMenuOpen(false)} />
         </div>
 
-        <Link to="/" onClick={() => setMenuOpen(false)}>Home</Link>
-        <Link to="/breakfast" onClick={() => setMenuOpen(false)}>Breakfast</Link>
-
-        <Link to="/lunch" onClick={() => setMenuOpen(false)} >Lunch</Link>
-        <Link to="/dinner" onClick={() => setMenuOpen(false)}>Dinner</Link>
-        <Link to="/bookingTbl" onClick={() => setMenuOpen(false)}>Book a Table</Link>
-
-        {user && (
-          <>
-            <Link to="/my-orders">My Orders</Link>
-
-            {user.role !== "admin" && (
-              <Link to="/cart">🛒 Cart ({getCartCount()})</Link>
-            )}
-
-            <div className="mobile-user">
-              <span>
-                👤 Hi, {user.role === "admin" ? "Admin Panel" : user.name}
-              </span>
-              <button onClick={handleLogout}>Logout</button>
+        {/* 1. This wrapper handles the scroll for links only */}
+        <div className="mobile-content-wrapper">
+          <nav className="mobile-nav-links">
+            <Link to="/" onClick={closeAllMenus}>Home</Link>
+            <div className="mobile-submenu-section">
+              <p className="submenu-title">Our Menu</p>
+              <Link to="/breakfast" onClick={closeAllMenus}>Breakfast</Link>
+              <Link to="/lunch" onClick={closeAllMenus}>Lunch</Link>
+              <Link to="/dinner" onClick={closeAllMenus}>Dinner</Link>
             </div>
-          </>
+            <Link to="/bookingTbl" onClick={closeAllMenus}>Book a Table</Link>
+            {user && <Link to="/my-orders" onClick={closeAllMenus}>My Orders</Link>}
+          </nav>
+        </div>
+
+        {/* 2. This footer stays at the VERY bottom and is NOT inside the scrollable wrapper */}
+        {user && (
+          <div className="mobile-user-footer">
+            <div className="mobile-user-info">
+              <span>👤 {user.role === "admin" ? "Admin Panel" : `Hi, ${user.name}`}</span>
+            </div>
+            <button className="mobile-logout-btn" onClick={handleLogout}>
+              Logout
+            </button>
+          </div>
         )}
       </div>
-
     </header>
   );
 };
-
 export default Navbar;

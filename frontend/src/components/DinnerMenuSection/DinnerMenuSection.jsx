@@ -5,7 +5,7 @@ import BookingModal from "../../pages/User/BookingModal/BookingModal";
 import { toast } from "react-toastify";
 
 const DinnerMenuSection = () => {
-  const { products, addToCart, navigate } = useContext(ShopContext);
+  const { products, addToCart, navigate, user } = useContext(ShopContext);
 
   const [loadingId, setLoadingId] = useState(null);
   const [orders, setOrders] = useState([]); // ✅ IMPORTANT
@@ -43,17 +43,13 @@ const DinnerMenuSection = () => {
   const placeOrder = async (item) => {
     try {
       setLoadingId(item._id);
-
-      const user = JSON.parse(localStorage.getItem("user"));
-
       if (!user || !user._id) {
         navigate("/login")
-        // toast.error("Please login first");
+        toast.error("Please login first");
         return;
       }
 
       addToCart(item._id);
-
       // ✅ UPDATE UI STATE
       setOrders((prev) => [
         ...prev,
@@ -63,9 +59,7 @@ const DinnerMenuSection = () => {
           status: "placed"
         }
       ]);
-
       toast.success("Added to Cart 🛒");
-
     } catch (err) {
       toast.error("Error");
     } finally {

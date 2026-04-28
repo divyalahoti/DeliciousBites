@@ -1,3 +1,4 @@
+/* GENERAL NAVBAR STYLES */
 .navbar {
   height: 70px;
   padding: 0 20px;
@@ -9,16 +10,24 @@
   background: rgba(239, 228, 219, 0.95);
   backdrop-filter: blur(10px);
   z-index: 1000;
+  top: 0;
+  left: 0;
 }
 
-/* LEFT */
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
 .logo {
   font-size: 20px;
   font-weight: 600;
   cursor: pointer;
+  color: #1c3b2f;
 }
 
-/* CENTER */
+/* CENTER LINKS (DESKTOP) */
 .nav-center {
   display: flex;
   gap: 40px;
@@ -30,275 +39,276 @@
 .nav-center a {
   text-decoration: none;
   color: #1c3b2f;
+  font-weight: 500;
+  transition: 0.2s;
 }
 
-/* DROPDOWN */
+.nav-center a:hover {
+  opacity: 0.7;
+}
+
+/* DESKTOP MENU DROPDOWN */
 .dropdown {
   position: relative;
 }
 
+.menu-trigger {
+  cursor: pointer;
+  color: #1c3b2f;
+  font-weight: 500;
+}
+
 .dropdown-menu {
   position: absolute;
-  top: 120%;
+  top: 100%;
+  left: 0;
   background: white;
-  padding: 10px;
-  border-radius: 10px;
-  display: none;
+  min-width: 160px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+  padding: 5px 0;
 }
 
 .dropdown:hover .dropdown-menu {
-  display: block;
-}
-
-/* RIGHT */
-.profile {
-  position: relative;
-  cursor: pointer;
-}
-
-/* DROPDOWN CONTAINER */
-.profile-dropdown {
-  position: absolute;
-  top: 120%;
-  right: 0;
-  min-width: 200px;
-
-  background: rgba(255, 255, 255, 0.95);
-  backdrop-filter: blur(12px);
-
-  border-radius: 14px;
-  padding: 8px;
-
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px) scale(0.95);
-
-  transition: all 0.25s ease;
-  z-index: 999;
-}
-
-/* SHOW ANIMATION */
-.profile-dropdown.show {
   opacity: 1;
   visibility: visible;
-  transform: translateY(0) scale(1);
 }
 
-/* ITEMS */
-.dropdown-item {
+.dropdown-menu a {
+  padding: 10px 15px;
+  font-size: 14px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.dropdown-menu a:last-child {
+  border-bottom: none;
+}
+
+/* RIGHT SIDE (PROFILE & LOGIN) */
+.nav-right {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-
-  gap: 10px;
-  padding: 10px 12px;
-
-  border-radius: 10px;
-  font-size: 14px;
-  color: #1c3b2f;
-
-  cursor: pointer;
-  text-decoration: none;
-
-  transition: all 0.2s ease;
+  gap: 15px;
 }
 
-/* HOVER EFFECT */
-.dropdown-item:hover {
-  background: rgba(28, 59, 47, 0.08);
-}
-
-/* CART COUNT BADGE */
-.count {
-  background: #1c3b2f;
-  color: white;
-  font-size: 12px;
-  padding: 2px 7px;
-  border-radius: 50px;
-}
-
-/* DIVIDER */
-.dropdown-divider {
-  height: 1px;
-  background: rgba(0, 0, 0, 0.08);
-  margin: 6px 0;
-}
-
-/* LOGOUT */
-.logout-btn {
-  width: 100%;
-  border: none;
-  background: transparent;
-  text-align: left;
-  color: red;
-}
-
-.admin-logout-btn {
-  margin-left: 10px;
-  padding: 6px 12px;
-  border: none;
-  border-radius: 20px;
-  background: red;
-  color: white;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.admin-logout-btn:hover {
-  opacity: 0.8;
-}
-
-.logout-btn:hover {
-  background: rgba(255, 0, 0, 0.08);
-}
-
-/* BUTTON */
-.login-btn {
-  padding: 6px 14px;
-  background: #1c3b2f;
-  color: white;
-  border-radius: 20px;
-  border: none;
-}
-
-
-
-/* MOBILE MENU */
-.menu-icon {
-  display: none;
-  font-size: 22px;
-  cursor: pointer;
+.profile {
+  position: relative;
 }
 
 .profile span {
   display: flex;
   align-items: center;
   gap: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  color: #1c3b2f;
+}
+
+/* PROFILE DROPDOWN (USER) */
+.profile-dropdown {
+  position: absolute;
+  top: 130%;
+  right: 0;
+  min-width: 180px;
+  background: white;
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: all 0.25s ease;
+  z-index: 999;
+}
+
+.profile-dropdown.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  color: #1c3b2f;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.dropdown-item:hover {
+  background: rgba(28, 59, 47, 0.05);
+}
+
+.count {
+  background: #1c3b2f;
+  color: white !important;
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.dropdown-divider {
+  height: 1px;
+  background: #eee;
+  margin: 5px 0;
+}
+
+/* BUTTONS */
+.login-btn {
+  padding: 8px 20px;
+  background: #1c3b2f;
+  color: white;
+  border-radius: 25px;
+  border: none;
+  cursor: pointer;
+}
+
+.admin-logout-btn {
+  padding: 6px 15px;
+  background: #d9534f;
+  color: white;
+  border-radius: 20px;
+  border: none;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+.logout-btn {
+  color: #d9534f !important;
+  font-weight: 600;
+}
+
+/* MOBILE OVERLAY */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(3px);
+  z-index: 1500;
+}
+
+/* MOBILE SIDEBAR */
+.menu-icon {
+  display: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #1c3b2f;
+}
+
+
+.mobile-menu.open {
+  left: 0;
+}
+
+.mobile-header {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  background: #efe4db;
 }
 
 
 
-.profile span:hover {
-  opacity: 0.7;
+.mobile-nav-links {
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
 }
+
+.mobile-menu a {
+  padding: 15px 25px;
+  color: #1c3b2f;
+  text-decoration: none;
+  font-weight: 500;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+}
+
+/* Mobile Submenu */
+.mobile-submenu-section {
+  background: rgba(0, 0, 0, 0.02);
+}
+
+.submenu-title {
+  padding: 15px 25px 5px;
+  font-size: 11px;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+
+.mobile-user-info {
+  margin-bottom: 15px;
+  font-weight: 600;
+  color: #1c3b2f;
+}
+
+/* Update these specific classes in your Navbar.css */
 
 .mobile-menu {
   position: fixed;
   top: 0;
   left: -100%;
   width: 280px;
-  /* Slightly wider */
-  height: 100vh;
-  /* Full viewport height */
-  background-color: #f7f3f0;
-  /* A clean, solid off-white */
+  /* Fixed height for all mobile browsers */
+  height: 100%;
+  height: -webkit-fill-available;
+  height: 100dvh;
+  background: #f7f3f0;
   display: flex;
   flex-direction: column;
-  padding: 0;
-  /* Remove default padding to control header separately */
+  /* This allows the footer to sit at bottom */
   transition: left 0.3s ease-in-out;
-  box-shadow: 10px 0 40px rgba(0, 0, 0, 0.2);
   z-index: 2100;
 }
 
-.mobile-header {
+.mobile-content-wrapper {
+  flex: 1;
+  /* This takes up all space except what the header/footer need */
+  overflow-y: auto;
+  /* If there are too many links, only this part scrolls */
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
+  flex-direction: column;
+}
+
+.mobile-user-footer {
+  flex-shrink: 0;
+  /* Prevents the footer from being squashed or hidden */
   padding: 20px;
+  padding-bottom: env(safe-area-inset-bottom, 20px);
+  /* Fix for iPhones with home bars */
   background: #efe4db;
-  /* Match navbar color for the header area */
-  font-size: 24px;
-}
-
-.mobile-menu a {
-  padding: 15px 25px;
-  /* More breathing room */
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  /* Subtle separation */
-  font-weight: 500;
-  color: #1c3b2f;
-  text-decoration: none;
-}
-
-.mobile-user {
-  margin-top: auto;
-  /* Pushes user info to the bottom */
-  padding: 20px;
-  background: #eee;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 100%;
-
-  background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(2px);
-
-  z-index: 1500;
 }
 
-.mobile-menu a {
-  padding: 12px 10px;
+.mobile-logout-btn {
+  width: 100%;
+  padding: 12px;
+  background: #d9534f;
+  color: white !important;
+  border: none;
   border-radius: 8px;
-  font-size: 16px;
-  color: #1c3b2f;
-  text-decoration: none;
-  transition: 0.2s;
-}
-
-.mobile-menu a:hover {
-  background: rgba(28, 59, 47, 0.08);
-}
-
-.mobile-user span {
-  font-weight: 600;
-}
-
-.mobile-menu.open {
-  left: 0;
-}
-
-/* .mobile-header {
-  display: flex;
-  justify-content: flex-end;
-  font-size: 22px;
+  font-weight: bold;
   cursor: pointer;
-} */
-
-.nav-left {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display: block;
+  /* Ensure it's not hidden by default */
 }
 
-/* MOBILE */
+/* MEDIA QUERIES */
 @media (max-width: 768px) {
-
-  .navbar {
-    padding: 0 15px;
-    /* 🔥 tighter spacing */
-  }
-
   .menu-icon {
     display: block;
-  }
-
-  .nav-left {
-    width: 100%;
-    justify-content: flex-start;
-  }
-
-  .logo {
-    font-size: 18px;
   }
 
   .nav-center,

@@ -15,11 +15,10 @@ const ShopContextProvider = (props) => {
     const [products, setProducts] = useState([]);
     const [cartItems, setCartItems] = useState({});
     const [token, setToken] = useState('')
+    const [user, setUser] = useState('')
     const navigate = useNavigate();
 
     const addToCart = async (itemId) => {
-        const user = JSON.parse(localStorage.getItem("user"));
-
         if (!user || !user._id) {
             toast.error("Please login first");
             return;
@@ -58,11 +57,8 @@ const ShopContextProvider = (props) => {
         let totalCount = 0;
 
         for (const item in cartItems) {
-
             totalCount += cartItems[item];
-
         }
-
         return totalCount;
     };
 
@@ -71,8 +67,6 @@ const ShopContextProvider = (props) => {
         cartData[itemId] = quantity;
 
         setCartItems(cartData);
-
-        const user = JSON.parse(localStorage.getItem("user"));
         if (token) {
             try {
                 await axios.post(
@@ -135,12 +129,8 @@ const ShopContextProvider = (props) => {
     }
     const removeFromCart = async (itemId) => {
         let cartData = { ...cartItems };
-
         delete cartData[itemId];
         setCartItems(cartData);
-
-        const user = JSON.parse(localStorage.getItem("user"));
-
         await axios.post(
             backendUrl + "/api/cart/update",
             {
@@ -154,9 +144,6 @@ const ShopContextProvider = (props) => {
     const clearCart = async () => {
         try {
             setCartItems({});
-
-            const user = JSON.parse(localStorage.getItem("user"));
-
             await axios.post(
                 backendUrl + "/api/cart/clear",
                 { userId: user._id },
@@ -175,7 +162,20 @@ const ShopContextProvider = (props) => {
             setToken(localStorage.getItem('token'))
             getUserCart(localStorage.getItem('token'))
         }
-    }, [])
+        else {
+            localStorage.removeItem("token");
+        }
+    }, [token])
+
+    useEffect(() => {
+        if (!user && localStorage.getItem('user')) {
+            setUser(localStorage.getItem('user'))
+        } else {
+            localStorage.removeItem("user");
+        }
+    }, [user]);
+    console.log(token);
+    console.log(user)
 
     const value = {
         products,
@@ -191,6 +191,7 @@ const ShopContextProvider = (props) => {
         clearCart,
         removeFromCart,
         setToken, token,
+        setUser,user,
         setCartItems
     }
     return (

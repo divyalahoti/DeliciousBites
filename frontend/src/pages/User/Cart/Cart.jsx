@@ -3,6 +3,7 @@ import { ShopContext } from "../../../deliciousBitesContext/ShopContext";
 import "./Cart.css";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { toast } from "react-toastify";
 
 const Cart = () => {
 
@@ -15,8 +16,6 @@ const Cart = () => {
     clearCart,
     navigate
   } = useContext(ShopContext);
-
-
 
   useEffect(() => {
     AOS.init({ duration: 800, once: true });
@@ -110,7 +109,14 @@ const Cart = () => {
 
           <button
             className="checkout-btn"
-            onClick={() => navigate("/place-order")}
+            onClick={() => {
+              if (getCartAmount() === 0) {
+                toast.error("Please add your favorite item in cart🛒");
+                return;
+              }
+
+              navigate("/place-order");
+            }}
           >
             Proceed to Checkout →
           </button>

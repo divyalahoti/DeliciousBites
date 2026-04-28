@@ -56,12 +56,12 @@ function App() {
   return (
     <div className="app-container">
       <ScrollToTop />
-      <Navbar setToken={setToken} />
+      <Navbar/>
       <ToastContainer />
       <hr />
       {/* ROUTES */}
       <Routes>
-        <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/login" element={<Login />} />
         {/* USER ROUTES */}
         <Route path="/" element={<Home />} />
         <Route path="/hero" element={<Hero />} />

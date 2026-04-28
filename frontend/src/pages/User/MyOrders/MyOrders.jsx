@@ -1,22 +1,17 @@
 import { useEffect, useState, useContext } from "react";
 import axios from "axios";
-import "./MyOrders.css";
 import { ShopContext } from "../../../deliciousBitesContext/ShopContext";
+import "./MyOrders.css";
 
 const MyOrders = () => {
-  const { backendUrl, currency } = useContext(ShopContext);
+  const { backendUrl, currency,token,user } = useContext(ShopContext);
   const [orders, setOrders] = useState([]);
   const [loading, setLoading] = useState(true);
 
   const fetchOrders = async () => {
     try {
-      const user = JSON.parse(localStorage.getItem("user"));
-      const token = localStorage.getItem("token");
       
-
-      // ✅ SAFETY CHECK
       if (!user || !token) {
-        console.log("User or token missing");
         setLoading(false);
         return;
       }
@@ -24,15 +19,13 @@ const MyOrders = () => {
       const res = await axios.post(
         backendUrl + "/api/orders/userorders",
         { userId: user._id },
-        {
-          headers: { token }
-        }
+        { headers: { token } }
       );
 
-      console.log("Orders API:", res.data);
+      console.log("Orders:", res.data);
 
       if (res.data.success) {
-        setOrders(res.data.orders.reverse());
+        setOrders(res.data.orders);
       }
 
     } catch (err) {
@@ -46,8 +39,17 @@ const MyOrders = () => {
     fetchOrders();
   }, []);
 
+  // ✅ STATUS CLASS HELPER
+  const getStatusClass = (status) => {
+    if (!status) return "status";
+
+    const formatted = status.toLowerCase().replace(/\s/g, "-");
+    return `status ${formatted}`;
+  };
+
   return (
     <div className="myorders-page">
+
       <h2>🧾 My Orders</h2>
 
       {loading ? (
@@ -56,14 +58,21 @@ const MyOrders = () => {
         <p>No orders yet</p>
       ) : (
         <div className="orders-container">
+
           {orders.map((order) => (
             <div className="order-card" key={order._id}>
 
+              {/* TOP */}
               <div className="order-top">
-                <span className="status">{order.status}</span>
-                <span>{new Date(order.date).toLocaleString()}</span>
+                <span className={getStatusClass(order.status)}>
+                  {order.status}
+                </span>
+                <span>
+                  {new Date(order.date).toLocaleString()}
+                </span>
               </div>
 
+              {/* ITEMS */}
               <div className="order-items">
                 {order.items.map((item, i) => (
                   <p key={i}>
@@ -72,13 +81,15 @@ const MyOrders = () => {
                 ))}
               </div>
 
+              {/* BOTTOM */}
               <div className="order-bottom">
-                <h3>{currency}{order.amount}</h3>
+                <h3>{currency || "₹"}{order.amount}</h3>
                 <p>{order.paymentMethod}</p>
               </div>
 
             </div>
           ))}
+
         </div>
       )}
     </div>

@@ -4,9 +4,7 @@ import { ShopContext } from "../../deliciousBitesContext/ShopContext";
 import { toast } from "react-toastify";
 
 const LunchMenuSection = () => {
-  const { products, addToCart, navigate } = useContext(ShopContext);
-
-
+  const { products, addToCart, navigate ,user} = useContext(ShopContext);
   const [orders, setOrders] = useState([]);
   const [loadingId, setLoadingId] = useState(null);
 
@@ -24,18 +22,14 @@ const LunchMenuSection = () => {
   const placeOrder = async (item) => {
     try {
       setLoadingId(item._id);
-
-      const user = JSON.parse(localStorage.getItem("user"));
-
       if (!user || !user._id) {
         navigate("/login")
-        // toast.error("Please login first");
+         toast.error("Please login first");
         return;
       }
 
       // ✅ ADD TO CART
       addToCart(item._id);
-
       // ✅ UPDATE LOCAL ORDER STATE (IMPORTANT)
       setOrders((prev) => [
         ...prev,
