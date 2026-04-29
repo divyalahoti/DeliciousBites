@@ -6,6 +6,7 @@ import "aos/dist/aos.css";
 import { toast } from "react-toastify";
 
 const Cart = () => {
+  
 
   const {
     products,

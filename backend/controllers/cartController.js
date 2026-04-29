@@ -14,7 +14,8 @@ export const addToCart = async (req, res) => {
       });
     } else {
       const itemIndex = cart.items.findIndex(
-        (item) => item.productId === itemId
+        // (item) => item.productId === itemId
+        (item) => item.productId.toString() === itemId
       );
 
       if (itemIndex > -1) {
@@ -37,15 +38,22 @@ export const getCart = async (req, res) => {
   try {
     const { userId } = req.body;
 
-    const cart = await cartModel.findOne({ userId });
+    let cart = await cartModel.findOne({ userId });
+
+    // ✅ CREATE CART IF NOT EXISTS
+    if (!cart) {
+      cart = new cartModel({
+        userId,
+        items: []
+      });
+      await cart.save();
+    }
 
     let cartData = {};
 
-    if (cart) {
-      cart.items.forEach((item) => {
-        cartData[item.productId] = item.quantity;
-      });
-    }
+    cart.items.forEach((item) => {
+      cartData[item.productId] = item.quantity;
+    });
 
     res.json({ success: true, cartData });
 
@@ -53,7 +61,6 @@ export const getCart = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-
 // ✅ UPDATE CART
 export const updateCart = async (req, res) => {
   try {
@@ -64,7 +71,7 @@ export const updateCart = async (req, res) => {
     if (!cart) return res.json({ success: false });
 
     const itemIndex = cart.items.findIndex(
-      (item) => item.productId === itemId
+      (item) => item.productId.toString() === itemId
     );
 
     if (itemIndex > -1) {
@@ -88,7 +95,10 @@ export const clearCart = async (req, res) => {
   try {
     const { userId } = req.body;
 
-    await cartModel.findOneAndDelete({ userId });
+    await cartModel.findOneAndUpdate(
+      { userId },
+      { items: [] }
+    );
 
     res.json({ success: true });
 
