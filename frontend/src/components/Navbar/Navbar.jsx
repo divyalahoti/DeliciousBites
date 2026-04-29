@@ -21,13 +21,21 @@ const Navbar = () => {
   //   return () => window.removeEventListener("storage", loadUser);
   // }, []);
 
+  // const handleLogout = () => {
+  //   setToken("");
+  //   setUser(null);
+  //   localStorage.clear();
+
+  //   setDropdownOpen(false); // Close dropdown on logout
+  //   setMenuOpen(false);     // Close mobile menu on logout
+  //   navigate("/login");
+  // };
+
   const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
     setToken("");
     setUser(null);
-    localStorage.clear();
-
-    setDropdownOpen(false); // Close dropdown on logout
-    setMenuOpen(false);     // Close mobile menu on logout
     navigate("/login");
   };
 

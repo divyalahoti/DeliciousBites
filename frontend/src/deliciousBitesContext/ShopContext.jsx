@@ -14,8 +14,16 @@ const ShopContextProvider = (props) => {
     const [showSearch, setShowSearch] = useState(false);
     const [products, setProducts] = useState([]);
     const [cartItems, setCartItems] = useState({});
-    const [token, setToken] = useState('')
-    const [user, setUser] = useState('')
+    // const [token, setToken] = useState('')
+    // const [user, setUser] = useState('')
+
+    const [token, setToken] = useState(localStorage.getItem("token") || "");
+
+    const [user, setUser] = useState(
+        localStorage.getItem("user")
+            ? JSON.parse(localStorage.getItem("user"))
+            : null
+    );
     const navigate = useNavigate();
 
     const addToCart = async (itemId) => {
@@ -157,25 +165,31 @@ const ShopContextProvider = (props) => {
         getProductsData()
     }, [])
 
-    useEffect(() => {
-        if (!token && localStorage.getItem('token')) {
-            setToken(localStorage.getItem('token'))
-            getUserCart(localStorage.getItem('token'))
-        }
-        else {
-            localStorage.removeItem("token");
-        }
-    }, [token])
+    // useEffect(() => {
+    //     if (!token && localStorage.getItem('token')) {
+    //         setToken(localStorage.getItem('token'))
+    //         getUserCart(localStorage.getItem('token'))
+    //     }
+    //     else {
+    //         localStorage.removeItem("token");
+    //     }
+    // }, [token])
+
+    // useEffect(() => {
+    //     if (!user && localStorage.getItem('user')) {
+    //         setUser(localStorage.getItem('user'))
+    //     } else {
+    //         localStorage.removeItem("user");
+    //     }
+    // }, [user]);
+    // console.log(token);
+    // console.log(user)
 
     useEffect(() => {
-        if (!user && localStorage.getItem('user')) {
-            setUser(localStorage.getItem('user'))
-        } else {
-            localStorage.removeItem("user");
+        if (token) {
+            getUserCart(token);
         }
-    }, [user]);
-    console.log(token);
-    console.log(user)
+    }, [token]);
 
     const value = {
         products,
@@ -191,7 +205,7 @@ const ShopContextProvider = (props) => {
         clearCart,
         removeFromCart,
         setToken, token,
-        setUser,user,
+        setUser, user,
         setCartItems
     }
     return (
